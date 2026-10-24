@@ -483,6 +483,15 @@ h3 {
   perspective: 1000px;
   perspective-origin: 50% 42%;
 }
+/* Tranh tren tuong 3D phai cham duoc: lop phong trong suot khong che tranh */
+.room,
+.room * {
+  pointer-events: none;
+}
+.room .frame,
+.room .frame * {
+  pointer-events: auto;
+}
 .room {
   position: absolute;
   top: 0;
