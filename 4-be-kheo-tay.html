@@ -911,27 +911,41 @@ const Music = {
   play(emo) {
     this.stop();
     const f = this.FILES[emo];
-    if (f) {
-      this.emo = emo;
-      const a = this.au = new Audio(f);
+    if (!f) {
+      this.synth(emo);
+      return;
+    }
+    this.emo = emo;
+    const paths = [f, f.replace("nhac/", "")];
+    const tryAt = (i) => {
+      if (i >= paths.length) {
+        if (this.emo === emo) {
+          this.au = null;
+          this.synth(emo);
+        }
+        return;
+      }
+      const a = this.au = new Audio(paths[i]);
       a.loop = true;
       a.volume = 0;
-      a.play().then(() => {
+      let moved = false;
+      const next = () => {
+        if (moved || this.au !== a) return;
+        moved = true;
+        tryAt(i + 1);
+      };
+      a.addEventListener("error", next);
+      const p = a.play();
+      if (p && p.then) p.then(() => {
         let v = 0;
         const iv = setInterval(() => {
           v = Math.min(0.9, v + 0.08);
           if (this.au === a) a.volume = v;
           if (v >= 0.9) clearInterval(iv);
         }, 80);
-      }).catch(() => {
-        if (this.au === a) {
-          this.au = null;
-          this.synth(emo);
-        }
-      });
-      return;
-    }
-    this.synth(emo);
+      }).catch(next);
+    };
+    tryAt(0);
   },
   synth(emo) {
     this.stop();
