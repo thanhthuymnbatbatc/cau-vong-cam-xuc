@@ -842,6 +842,24 @@ h3 {
 .card.hint {
   animation: pulse 1s infinite;
 }
+@media (max-width: 700px) {
+  /* Dien thoai: the thong tin nam DUOI phong 3D, khong che tranh */
+  .viewport {
+    height: auto;
+    padding-top: var(--vh,560px);
+  }
+  .info {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    width: auto;
+    margin: 8px;
+  }
+  .mascot {
+    bottom: auto;
+    top: calc(var(--vh,560px) - 66px);
+  }
+}
 @media (max-width: 620px) {
   .mascot {
     width: 60px;
