@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Xưởng Màu Kỳ Diệu</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@600;800;900&display=swap">
+<script>window.onerror = function(m, s, l, c) {
+  try {
+    var d = document.getElementById("errBanner");
+    if (!d) {
+      d = document.createElement("div");
+      d.id = "errBanner";
+      d.style.cssText = "position:fixed;left:8px;right:8px;bottom:8px;z-index:9999;background:#FFF1D9;color:#7A4500;border:3px solid #1F2A52;border-radius:14px;padding:10px 12px;font:600 14px/1.4 Arial,sans-serif";
+      (document.body || document.documentElement).appendChild(d);
+    }
+    d.textContent = "⚠️ Máy này báo lỗi: " + m + " (dòng " + l + "). Cô chụp màn hình gửi lại nhé.";
+  } catch (e) {
+  }
+};
+</script><style>:root {
+  --ink:#1F2A52;
+  --ink-soft:#4A5582;
+  --muted:#6A759E;
+  --paper:#FFFFFF;
+  --ground:#EEF4FF;
+  --dot:#D8E3FA;
+  --line:#D3DDF3;
+  --red:#EF4A3C;
+  --orange:#FF8B2B;
+  --yellow:#FFC928;
+  --green:#2DB66B;
+  --blue:#2F7BEF;
+  --purple:#8A55E0;
+  --pink:#FF6FA8;
+  --brown:#9A6136;
+  --good:#E3F8EC;
+  --good-ink:#0F7A43;
+  --try:#FFF1D9;
+  --try-ink:#9A5A00;
+  --display:"Baloo 2","Nunito","Segoe UI Rounded","Segoe UI",Arial,sans-serif;
+  --body:"Nunito","Segoe UI",Arial,sans-serif;
+  color-scheme: light;
+}
+* {
+  box-sizing: border-box;
+}
+[hidden] {
+  display: none !important;
+}
+html,
+body {
+  margin: 0;
+}
+body {
+  font-family: var(--body);
+  color: var(--ink);
+  background-color: var(--ground);
+  background-image: radial-gradient(var(--dot) 1.4px, transparent 1.6px);
+  background-size: 22px 22px;
+  min-height: 100vh;
+  -webkit-tap-highlight-color: transparent;
+}
+button,
+a,
+label,
+select,
+input {
+  touch-action: manipulation;
+}
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 4px solid var(--blue);
+  outline-offset: 3px;
+}
+h1,
+h2,
+h3 {
+  font-family: var(--display);
+  line-height: 1.1;
+  margin: 0;
+  text-wrap: balance;
+}
+.wrap {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding-block: 14px 28px;
+  padding-left: max(14px, env(safe-area-inset-left, 0px));
+  padding-right: max(14px, env(safe-area-inset-right, 0px));
+}
+.sticker {
+  background: var(--paper);
+  border: 3px solid var(--ink);
+  border-radius: 22px;
+  box-shadow: 0 5px 0 var(--ink);
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 3px solid var(--ink);
+  border-radius: 16px;
+  background: var(--paper);
+  box-shadow: 0 4px 0 var(--ink);
+  padding: 10px 16px;
+  font-weight: 900;
+  font-size: 1rem;
+  text-decoration: none;
+  color: var(--ink);
+  transition: transform .08s, box-shadow .08s;
+  white-space: nowrap;
+}
+.btn:hover {
+  transform: translateY(-1px);
+}
+.btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--ink);
+}
+.btn[disabled] {
+  opacity: .4;
+  cursor: not-allowed;
+  transform: none;
+}
+.btn.y {
+  background: var(--yellow);
+}
+.btn.g {
+  background: var(--green);
+  color: #fff;
+}
+.btn.b {
+  background: var(--blue);
+  color: #fff;
+}
+.btn.p {
+  background: var(--pink);
+  color: #fff;
+}
+.btn.o {
+  background: var(--orange);
+  color: #fff;
+}
+.btn.v {
+  background: var(--purple);
+  color: #fff;
+}
+.btn.sm {
+  padding: 7px 11px;
+  font-size: .9rem;
+  border-radius: 13px;
+  box-shadow: 0 3px 0 var(--ink);
+}
+.btn.on {
+  background: var(--ink);
+  color: #fff;
+}
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 10px 14px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.brand .mark {
+  width: 52px;
+  height: 52px;
+  flex: none;
+}
+.brand h1 {
+  font-size: clamp(1.35rem, 3.2vw, 2rem);
+  font-weight: 800;
+}
+.brand p {
+  margin: 0;
+  font-weight: 800;
+  color: var(--ink-soft);
+  font-size: .92rem;
+}
+.tools {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 900;
+  font-size: .85rem;
+  padding: 4px 11px;
+  border-radius: 99px;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+}
+.foot {
+  text-align: center;
+  color: var(--muted);
+  font-weight: 800;
+  font-size: .85rem;
+  margin-top: 16px;
+  line-height: 1.5;
+}
+.stars {
+  display: inline-flex;
+  gap: 3px;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+.stars i {
+  font-style: normal;
+  filter: grayscale(1) opacity(.35);
+  transition: filter .3s, transform .3s;
+}
+.stars i.on {
+  filter: none;
+  transform: scale(1.15);
+}
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%) translateY(140%);
+  background: var(--ink);
+  color: #fff;
+  font-weight: 900;
+  padding: 12px 20px;
+  border-radius: 16px;
+  z-index: 200;
+  transition: transform .3s;
+  max-width: 90vw;
+  text-align: center;
+}
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+}
+.confetti {
+  position: fixed;
+  top: -20px;
+  width: 11px;
+  height: 16px;
+  border-radius: 3px;
+  pointer-events: none;
+  z-index: 300;
+  animation: fall 1.9s linear forwards;
+}
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: .85;
+  }
+}
+@keyframes pop {
+  0% {
+    transform: scale(.9);
+  }
+  60% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-9px);
+  }
+  40% {
+    transform: translateX(9px);
+  }
+  60% {
+    transform: translateX(-6px);
+  }
+  80% {
+    transform: translateX(6px);
+  }
+}
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 201, 40, .9), 0 4px 0 var(--ink);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(255, 201, 40, 0), 0 4px 0 var(--ink);
+  }
+}
+@keyframes floaty {
+  0%, 100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(3deg);
+  }
+}
+.shake {
+  animation: shake .45s;
+}
+.pulse {
+  animation: pulse 1s infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition: none !important;
+  }
+}
+@media print {
+  body {
+    background: #fff;
+  }
+}
+#startGate {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 500;
+  background: rgba(238, 244, 255, .97);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+}
+#startGate button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--yellow);
+  border: 4px solid var(--ink);
+  border-radius: 32px;
+  box-shadow: 0 8px 0 var(--ink);
+  padding: 22px 40px;
+  animation: pulse 1.4s infinite;
+  cursor: pointer;
+}
+#startGate .sg-bow .mark {
+  width: 110px;
+  height: 110px;
+}
+#startGate b {
+  font-family: var(--display);
+  font-size: 2.2rem;
+  line-height: 1.1;
+}
+#startGate small {
+  font-weight: 900;
+  font-size: 1.1rem;
+  color: var(--ink-soft);
+}
+#startGate p {
+  max-width: 340px;
+  font-weight: 800;
+  color: var(--ink-soft);
+  margin: 22px 0 0;
+  line-height: 1.5;
+}
+.nogap .tools > *,
+.nogap .row > *,
+.nogap .tags > *,
+.nogap .brand > *,
+.nogap .bottom > *,
+.nogap .rooms > *,
+.nogap .themes > *,
+.nogap .thumbs > *,
+.nogap .dots > *,
+.nogap .stars > *,
+.nogap .bar > *,
+.nogap .pdots > *,
+.nogap .sdots > *,
+.nogap .words > *,
+.nogap .padbar > *,
+.nogap .sizes > *,
+.nogap .meter > *,
+.nogap .prompt > *,
+.nogap .tab > *,
+.nogap .top > *,
+.nogap .ghead > *,
+.nogap .phead > *,
+.nogap .chead > *,
+.nogap .ph > *,
+.nogap .topbar > * {
+  margin: 4px;
+}
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  padding: 10px 12px;
+  border: 3px solid var(--ink);
+  border-radius: 18px;
+  background: var(--paper);
+  box-shadow: 0 4px 0 var(--ink);
+  font-weight: 900;
+}
+.tab .ti {
+  font-size: 1.8rem;
+}
+.tab small {
+  display: block;
+  font-weight: 800;
+  color: var(--muted);
+  font-size: .78rem;
+}
+.tab.on {
+  background: var(--yellow);
+}
+.tab.on small {
+  color: var(--ink-soft);
+}
+.panel {
+  margin-top: 16px;
+  padding: 16px 18px;
+}
+.phead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.phead h2 {
+  font-size: 1.6rem;
+}
+.prompt {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 14px 0;
+  padding: 12px 16px;
+  border-radius: 18px;
+  background: #F3F7FF;
+  border: 2px solid var(--line);
+}
+.prompt .say {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  flex: none;
+  font-size: 1.5rem;
+  background: var(--yellow);
+  border: 3px solid var(--ink);
+  box-shadow: 0 3px 0 var(--ink);
+}
+.prompt h3 {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+}
+.prompt p {
+  margin: 0;
+  font-weight: 800;
+  color: var(--ink-soft);
+}
+.blobs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
+  gap: 14px;
+}
+.blob {
+  aspect-ratio: 1/1;
+  max-width: 100%;
+  border: 0;
+  background: none;
+  padding: 0;
+  transition: transform .15s;
+}
+.blob svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: drop-shadow(0 5px 0 rgba(31, 42, 82, .9));
+}
+.blob:hover {
+  transform: scale(1.05) rotate(-2deg);
+}
+.blob.hint {
+  animation: floaty 1s infinite;
+}
+.blob.hint svg {
+  filter: drop-shadow(0 0 0 #fff) drop-shadow(0 0 14px #FFC928) drop-shadow(0 5px 0 rgba(31, 42, 82, .9));
+}
+.blob .nm {
+  display: block;
+  font-weight: 900;
+  margin-top: 4px;
+  opacity: 0;
+  transition: opacity .2s;
+}
+.blob.show .nm {
+  opacity: 1;
+}
+.fb {
+  min-height: 54px;
+  margin-top: 14px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  font-size: 1.12rem;
+  font-weight: 900;
+  background: #F3F7FF;
+  color: var(--ink-soft);
+}
+.fb.good {
+  background: var(--good);
+  color: var(--good-ink);
+  animation: pop .35s;
+}
+.fb.try {
+  background: var(--try);
+  color: var(--try-ink);
+}
+.seg {
+  display: inline-flex;
+  border: 3px solid var(--ink);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 3px 0 var(--ink);
+}
+.seg button {
+  border: 0;
+  background: var(--paper);
+  padding: 7px 12px;
+  font-weight: 900;
+}
+.seg button + button {
+  border-left: 3px solid var(--ink);
+}
+.seg button.on {
+  background: var(--ink);
+  color: #fff;
+}
+.faces {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 14px;
+}
+.face {
+  border: 3px solid var(--ink);
+  border-radius: 22px;
+  background: var(--paper);
+  box-shadow: 0 4px 0 var(--ink);
+  padding: 10px 8px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.face svg {
+  width: 100%;
+  max-width: 120px;
+  height: auto;
+}
+.face b {
+  font-family: var(--display);
+  font-size: 1.5rem;
+  line-height: 1;
+}
+.face span {
+  font-weight: 800;
+  color: var(--ink-soft);
+}
+.face.hideLbl b,
+.face.hideLbl span {
+  display: none;
+}
+.face.boing svg {
+  animation: pop .5s;
+}
+.face.hint {
+  animation: pulse 1s infinite;
+}
+.dance {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 16px;
+  margin-top: 12px;
+}
+.stageWrap {
+  position: relative;
+  border: 3px solid var(--ink);
+  border-radius: 22px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  max-width: 100%;
+  background: linear-gradient(#FFF 0, #F3F7FF 100%);
+}
+.stageWrap.night {
+  background: linear-gradient(#24305E, #3B4C8C);
+}
+#pic {
+  position: absolute;
+  left: 12%;
+  top: 8%;
+  width: 76%;
+  height: 84%;
+  object-fit: contain;
+  transform-origin: 50% 90%;
+  border-radius: 10px;
+}
+#fx {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+#pad {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  touch-action: none;
+  cursor: crosshair;
+}
+.padbar {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+  z-index: 2;
+}
+.padbar .sw {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 3px solid var(--ink);
+}
+.padbar .sw.on {
+  outline: 3px solid var(--yellow);
+  outline-offset: 2px;
+}
+.ctrl {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  min-width: 0;
+}
+.box {
+  border: 2px solid var(--line);
+  border-radius: 18px;
+  padding: 10px 12px;
+  background: var(--paper);
+}
+.box h3 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.emoBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 2px solid var(--ink);
+  border-radius: 99px;
+  padding: 4px 10px 4px 4px;
+  background: var(--paper);
+  font-weight: 900;
+  font-size: .9rem;
+}
+.emoBtn svg {
+  width: 30px;
+  height: 30px;
+}
+.emoBtn.on {
+  background: var(--ink);
+  color: #fff;
+}
+.magic.on {
+  background: var(--purple);
+  color: #fff;
+}
+.sentence {
+  font-family: var(--display);
+  font-size: 1.5rem;
+  line-height: 1.25;
+  margin: 4px 0 8px;
+}
+.sentence em {
+  font-style: normal;
+  color: var(--purple);
+}
+.anim-bounce {
+  animation: bounce .7s ease-in-out infinite;
+}
+.anim-sway {
+  animation: sway 1.6s ease-in-out infinite;
+}
+.anim-fly {
+  animation: fly 3.2s ease-in-out infinite;
+}
+.anim-spin {
+  animation: wiggle .5s ease-in-out infinite;
+}
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0) scale(1, 1);
+  }
+  40% {
+    transform: translateY(-14%) scale(.97, 1.03);
+  }
+  80% {
+    transform: translateY(0) scale(1.04, .96);
+  }
+}
+@keyframes sway {
+  0%, 100% {
+    transform: rotate(-7deg);
+  }
+  50% {
+    transform: rotate(7deg);
+  }
+}
+@keyframes fly {
+  0% {
+    transform: translate(0, 0) rotate(0);
+  }
+  25% {
+    transform: translate(-8%, -10%) rotate(-6deg);
+  }
+  50% {
+    transform: translate(0, -16%) rotate(0);
+  }
+  75% {
+    transform: translate(8%, -10%) rotate(6deg);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+@keyframes wiggle {
+  0%, 100% {
+    transform: rotate(-3deg) scale(1);
+  }
+  50% {
+    transform: rotate(3deg) scale(1.05);
+  }
+}
+@media (max-width: 900px) {
+  .dance {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 620px) {
+  .tabs {
+    grid-template-columns: 1fr;
+  }
+  .tab {
+    padding: 8px 10px;
+  }
+  .blobs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .faces {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+</style>
+</head>
+<body>
+<div class="wrap"><div id="nojs" style="margin:10px auto;max-width:900px;background:#FFF1D9;color:#7A4500;border:3px solid #1F2A52;border-radius:14px;padding:12px 14px;font:700 16px/1.5 Arial,sans-serif">⚠️ Máy đang chỉ <b>xem trước</b> file nên trò chơi chưa chạy. Trên điện thoại hãy mở bằng <b>đường link (quét mã QR)</b> trong Safari hoặc Chrome, không mở file trong Zalo, Tệp hay Drive.</div><script>(function() {
+  var n = document.getElementById("nojs");
+  if (n) n.parentNode.removeChild(n);
+})();
+</script>
+  <header class="topbar sticker">
+    <div class="brand"><span id="logo"></span><div><h1>Xưởng Màu Kỳ Diệu</h1><p>Magic Colour Studio · 3 trò chơi cho bước Nghe – Ngắm – Kể</p></div></div>
+    <div class="tools"><button class="btn sm" id="voiceBtn"></button><a class="btn sm" href="index.html">🏠 Cầu Vồng Cảm Xúc</a></div>
+  </header>
+  <nav class="tabs" role="tablist" aria-label="Trò chơi">
+    <button class="tab on" data-t="hunt" role="tab"><span class="ti">🎨</span><span>Săn Sắc Màu<small>Colour Hunt · bước NGẮM</small></span></button>
+    <button class="tab" data-t="faces" role="tab"><span class="ti">😊</span><span>Mặt Cười Biết Nói<small>Feeling Faces · bước NGHE</small></span></button>
+    <button class="tab" data-t="dance" role="tab"><span class="ti">💃</span><span>Tranh Em Biết Múa<small>Dancing Pictures · bước KỂ</small></span></button>
+  </nav>
+
+  <section class="panel sticker" id="p-hunt">
+    <div class="phead"><h2>Săn Sắc Màu <small style="font-size:1rem;color:var(--muted)">Find the colour</small></h2>
+      <div class="row" style="align-items:center"><div class="seg" id="huntLvl"><button class="on" data-n="6">6 màu</button><button data-n="8">8 màu</button></div><div class="stars" id="huntStars"></div></div></div>
+    <div class="prompt"><button class="say" id="huntSay" aria-label="Nghe lại">🔊</button><div><h3 id="huntQ">Find red!</h3><p id="huntVi">Bé tìm màu đỏ nhé!</p></div></div>
+    <div class="blobs" id="blobs"></div>
+    <div class="fb" id="huntFb">👂 Nghe cô Bạn Màu đọc, rồi chạm vào đúng màu. Đủ 5 sao là thắng!</div>
+  </section>
+
+  <section class="panel sticker" id="p-faces" hidden>
+    <div class="phead"><h2>Mặt Cười Biết Nói <small style="font-size:1rem;color:var(--muted)">How do you feel?</small></h2>
+      <div class="row" style="align-items:center"><div class="seg" id="faceMode"><button class="on" data-m="explore">Khám phá</button><button data-m="quiz">Đố bé</button></div><div class="stars" id="faceStars" hidden></div></div></div>
+    <div class="prompt"><button class="say" id="faceSay" aria-label="Nghe lại">🔊</button><div><h3 id="faceQ">How do you feel?</h3><p id="faceVi">Chạm vào khuôn mặt để nghe tên cảm xúc. Con thấy mình giống bạn nào?</p></div></div>
+    <div class="faces" id="faces"></div>
+    <div class="fb" id="faceFb">😊 Mọi cảm xúc đều được chấp nhận. Con nói «I feel happy» hoặc nói bằng tiếng Việt đều giỏi!</div>
+  </section>
+
+  <section class="panel sticker" id="p-dance" hidden>
+    <div class="phead"><h2>Tranh Em Biết Múa <small style="font-size:1rem;color:var(--muted)">Dancing Pictures</small></h2>
+      <div class="row"><label class="btn sm b" for="upload">📷 Đưa ảnh tranh của bé</label><input type="file" id="upload" accept="image/*" hidden><button class="btn sm" id="drawBtn">✏️ Vẽ ngay</button><button class="btn sm" id="sampleBtn">🖼️ Tranh ví dụ</button></div></div>
+    <div class="dance">
+      <div>
+        <div class="stageWrap" id="stage"><img id="pic" alt="Tranh của bé"><canvas id="fx"></canvas><canvas id="pad" hidden></canvas><div class="padbar" id="padbar" hidden></div></div>
+        <p style="margin:8px 2px 0;font-weight:800;color:var(--muted);font-size:.85rem">Chỉ chụp tranh, không chụp mặt trẻ. Ảnh nằm trong máy này, đóng trang là mất, không gửi đi đâu.</p>
+      </div>
+      <div class="ctrl">
+        <div class="box"><h3>1. Tranh của con cảm thấy thế nào?</h3><div class="row" id="emoRow"></div></div>
+        <div class="box"><h3>2. Bật phép màu ✨</h3><div class="row" id="magicRow"></div>
+          <div class="row" style="margin-top:8px"><button class="btn sm g" id="musicBtn">🎵 Bật nhạc</button><button class="btn sm" id="stopBtn">⏹ Dừng tất cả</button></div></div>
+        <div class="box"><h3>3. Bé giới thiệu tranh</h3><div class="sentence" id="sentence"></div><div class="row"><button class="btn sm y" id="speakS">🗣️ Nghe mẫu câu</button><button class="btn sm" id="challenge">🎯 Thử thách bút màu</button></div><p id="chText" style="margin:8px 0 0;font-weight:900;color:var(--purple)"></p></div>
+      </div>
+    </div>
+  </section>
+  <p class="foot">Ở lớp cô điều khiển, ở nhà bé chơi cùng cha mẹ<br>Chạy trên Chrome, Edge, Safari · máy tính, máy tính bảng, điện thoại Android, iOS · Không đăng nhập, không quảng cáo, không thu dữ liệu của trẻ · Trường Mầm non Bất Bạt C</p>
+</div>
+<script>const $ = (s) => document.querySelector(s), $$ = (s) => [...document.querySelectorAll(s)];
+const shuffle = (a) => {
+  a = [...a];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.random() * (i + 1) | 0;
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+};
+const pick = (a) => a[Math.random() * a.length | 0];
+const Store = {
+  get(k, d) {
+    try {
+      const v = localStorage.getItem("cvcx." + k);
+      return v == null ? d : JSON.parse(v);
+    } catch (e) {
+      return d;
+    }
+  },
+  set(k, v) {
+    try {
+      localStorage.setItem("cvcx." + k, JSON.stringify(v));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+};
+const Voice = {
+  on: Store.get("voice", true),
+  en: null,
+  vi: null,
+  init() {
+    if (!("speechSynthesis" in window)) return;
+    const f = this.pick = () => {
+      const v = speechSynthesis.getVoices();
+      this.en = v.find((x) => /en[-_]US/i.test(x.lang) && /female|zira|aria|jenny|samantha|google us/i.test(x.name)) || v.find((x) => /en[-_]US/i.test(x.lang)) || v.find((x) => /^en/i.test(x.lang)) || null;
+      this.vi = v.find((x) => /^vi/i.test(x.lang)) || null;
+    };
+    f();
+    try {
+      speechSynthesis.addEventListener("voiceschanged", f);
+    } catch (e) {
+      speechSynthesis.onvoiceschanged = f;
+    }
+  },
+  /* parts: [["Find red!","en"],["Bé tìm màu đỏ","vi"]] — câu tiếng Việt chỉ đọc khi máy có giọng tiếng Việt */
+  say(parts2, rate) {
+    if (!this.on || !("speechSynthesis" in window)) return;
+    try {
+      if (typeof parts2 === "string") parts2 = [[parts2, "en"]];
+      if (!this.en && !this.vi) this.pick && this.pick();
+      const go = () => parts2.forEach(([t, l]) => {
+        if (l === "vi" && !this.vi) return;
+        const u = new SpeechSynthesisUtterance(t);
+        u.lang = l === "vi" ? "vi-VN" : "en-US";
+        const v = l === "vi" ? this.vi : this.en;
+        if (v) u.voice = v;
+        u.rate = rate || (l === "vi" ? 0.95 : 0.85);
+        u.pitch = 1.08;
+        speechSynthesis.speak(u);
+      });
+      if (speechSynthesis.speaking || speechSynthesis.pending) {
+        speechSynthesis.cancel();
+        setTimeout(go, 80);
+      } else go();
+    } catch (e) {
+    }
+  },
+  toggle() {
+    this.on = !this.on;
+    Store.set("voice", this.on);
+    if (!this.on && "speechSynthesis" in window) speechSynthesis.cancel();
+    return this.on;
+  }
+};
+Voice.init();
+const Sfx = {
+  ctx: null,
+  on: true,
+  ac() {
+    if (!this.ctx) {
+      const C = window.AudioContext || window.webkitAudioContext;
+      if (!C) return null;
+      this.ctx = new C();
+    }
+    if (this.ctx.state !== "running") {
+      try {
+        this.ctx.resume();
+      } catch (e) {
+      }
+    }
+    return this.ctx;
+  },
+  tone(f, t0, d, type = "sine", g = 0.12) {
+    const c = this.ac();
+    if (!c || !this.on) return;
+    const o = c.createOscillator(), a = c.createGain();
+    o.type = type;
+    o.frequency.value = f;
+    o.connect(a);
+    a.connect(c.destination);
+    const s = c.currentTime + t0;
+    a.gain.setValueAtTime(0, s);
+    a.gain.linearRampToValueAtTime(g, s + 0.02);
+    a.gain.exponentialRampToValueAtTime(1e-3, s + d);
+    o.start(s);
+    o.stop(s + d + 0.05);
+  },
+  good() {
+    [523, 659, 784, 1047].forEach((f, i) => this.tone(f, i * 0.09, 0.25, "triangle"));
+  },
+  bad() {
+    this.tone(330, 0, 0.18, "sine", 0.1);
+    this.tone(262, 0.16, 0.28, "sine", 0.1);
+  },
+  pop() {
+    this.tone(880, 0, 0.08, "square", 0.05);
+  },
+  win() {
+    [523, 659, 784, 659, 784, 1047].forEach((f, i) => this.tone(f, i * 0.12, 0.3, "triangle"));
+  }
+};
+function confetti(n = 70) {
+  const cols = ["#EF4A3C", "#FF8B2B", "#FFC928", "#2DB66B", "#2F7BEF", "#8A55E0", "#FF6FA8"];
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  for (let i = 0; i < n; i++) {
+    const e = document.createElement("i");
+    e.className = "confetti";
+    e.style.left = Math.random() * 100 + "vw";
+    e.style.background = cols[i % cols.length];
+    e.style.animationDelay = Math.random() * 0.5 + "s";
+    document.body.appendChild(e);
+    setTimeout(() => e.remove(), 2600);
+  }
+}
+function toast(msg, ms = 2200) {
+  let t = $("#toast");
+  if (!t) {
+    t = document.createElement("div");
+    t.id = "toast";
+    t.className = "toast";
+    t.setAttribute("role", "status");
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(t._h);
+  t._h = setTimeout(() => t.classList.remove("show"), ms);
+}
+function starsHTML(n, max = 5) {
+  let s = "";
+  for (let i = 0; i < max; i++) s += '<i class="'.concat(i < n ? "on" : "", '">⭐</i>');
+  return s;
+}
+const RAINBOW = '<svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-width="6"><path d="M8 46a24 24 0 0 1 48 0" stroke="#EF4A3C"/><path d="M15 46a17 17 0 0 1 34 0" stroke="#FFC928"/><path d="M22 46a10 10 0 0 1 20 0" stroke="#2DB66B"/></g><circle cx="12" cy="49" r="7" fill="#fff" stroke="#1F2A52" stroke-width="3"/><circle cx="52" cy="49" r="7" fill="#fff" stroke="#1F2A52" stroke-width="3"/></svg>';
+function inFrame() {
+  try {
+    return window.self !== window.top;
+  } catch (e) {
+    return true;
+  }
+}
+function bindVoiceBtn(btn) {
+  if (!btn) return;
+  const r = () => {
+    btn.innerHTML = Voice.on ? "🔊 Giọng đọc: bật" : "🔇 Giọng đọc: tắt";
+    btn.setAttribute("aria-pressed", Voice.on);
+  };
+  r();
+  btn.onclick = () => {
+    Voice.toggle();
+    r();
+  };
+}
+const Music = {
+  iv: null,
+  step: 0,
+  emo: null,
+  vol: 0.09,
+  P: {
+    happy: { bpm: 124, root: 60, sc: [0, 2, 4, 7, 9, 12, 14, 16], w: "triangle", pat: [0, 2, 4, 2, 5, 4, 2, 7], prog: [0, 5, 7, 5], bass: 1 },
+    sad: { bpm: 64, root: 57, sc: [0, 2, 3, 5, 7, 8, 10, 12], w: "sine", pat: [4, 3, 2, 0, 2, 3, 1, 0], prog: [0, -4, -2, -5], bass: 1 },
+    calm: { bpm: 70, root: 60, sc: [0, 2, 4, 7, 9, 12, 14, 16], w: "sine", pat: [0, 4, 2, 5, 3, 6, 4, 2], prog: [0, -3, 5, 0], bass: 1, soft: 1 },
+    excited: { bpm: 150, root: 62, sc: [0, 2, 4, 5, 7, 9, 11, 12], w: "square", pat: [0, 4, 7, 4, 5, 7, 4, 2], prog: [0, 5, 7, 0], bass: 1, drum: 1 },
+    surprised: { bpm: 108, root: 64, sc: [0, 2, 4, 6, 7, 9, 11, 12], w: "triangle", pat: [0, 7, 1, 6, 2, 5, 7, 0], prog: [0, 2, 0, -2], bass: 0 },
+    angry: { bpm: 96, root: 50, sc: [0, 1, 3, 5, 6, 8, 10, 12], w: "sawtooth", pat: [0, 0, 3, 0, 1, 0, 3, 4], prog: [0, 1, 0, -2], bass: 1, drum: 1 }
+  },
+  hz: (m) => 440 * Math.pow(2, (m - 69) / 12),
+  FILES: { happy: "nhac/nhac-vui.mp3", sad: "nhac/nhac-buon.mp3", calm: "nhac/nhac-binh-yen.mp3", excited: "nhac/nhac-hao-huc.mp3" },
+  au: null,
+  play(emo) {
+    this.stop();
+    const f = this.FILES[emo];
+    if (f) {
+      this.emo = emo;
+      const a = this.au = new Audio(f);
+      a.loop = true;
+      a.volume = 0;
+      a.play().then(() => {
+        let v = 0;
+        const iv = setInterval(() => {
+          v = Math.min(0.9, v + 0.08);
+          if (this.au === a) a.volume = v;
+          if (v >= 0.9) clearInterval(iv);
+        }, 80);
+      }).catch(() => {
+        if (this.au === a) {
+          this.au = null;
+          this.synth(emo);
+        }
+      });
+      return;
+    }
+    this.synth(emo);
+  },
+  synth(emo) {
+    this.stop();
+    const p = this.P[emo];
+    if (!p) return;
+    this.emo = emo;
+    this.step = 0;
+    const c = Sfx.ac();
+    if (!c) return;
+    const dt = 60 / p.bpm / 2;
+    const tick = () => {
+      const s = this.step++, ch = p.prog[Math.floor(s / 8) % p.prog.length], n = p.root + ch + p.sc[p.pat[s % 8]];
+      const was = Sfx.on;
+      Sfx.on = true;
+      Sfx.tone(this.hz(n + (s % 16 >= 8 && !p.soft ? 12 : 0)), 0, dt * (p.soft ? 3 : 1.6), p.w, this.vol * (p.w === "sawtooth" || p.w === "square" ? 0.45 : 1));
+      if (p.bass && s % 4 === 0) Sfx.tone(this.hz(p.root + ch - 12), 0, dt * (p.soft ? 6 : 3), "sine", this.vol * 1.1);
+      if (p.drum && s % 2 === 0) Sfx.tone(s % 4 === 0 ? 70 : 180, 0, 0.09, "square", this.vol * 0.5);
+      Sfx.on = was;
+    };
+    tick();
+    this.iv = setInterval(tick, dt * 1e3);
+  },
+  stop() {
+    clearInterval(this.iv);
+    this.iv = null;
+    if (this.au) {
+      try {
+        this.au.pause();
+      } catch (e) {
+      }
+      this.au = null;
+    }
+    this.emo = null;
+  }
+};
+const EMO = {
+  happy: { vi: "Vui", en: "Happy", col: "#FFC928", pal: ["#FFC928", "#FF8B2B", "#FF6FA8", "#FFE27A"] },
+  sad: { vi: "Buồn", en: "Sad", col: "#6FA8FF", pal: ["#2F7BEF", "#6FA8FF", "#9DB8E8", "#5466B8"] },
+  calm: { vi: "Bình yên", en: "Calm", col: "#5FD394", pal: ["#2DB66B", "#7BE0B0", "#4FC3C9", "#B6E8A5"] },
+  excited: { vi: "Háo hức", en: "Excited", col: "#FF7EB0", pal: ["#FF6FA8", "#FF8B2B", "#EF4A3C", "#FFC928"] },
+  surprised: { vi: "Ngạc nhiên", en: "Surprised", col: "#B48CFF", pal: ["#8A55E0", "#B48CFF", "#2F7BEF", "#FF6FA8"] },
+  angry: { vi: "Tức giận", en: "Angry", col: "#FF7A6B", pal: ["#EF4A3C", "#B5301F", "#FF8B2B", "#6E2A2A"] }
+};
+function faceSVG(e, label) {
+  const c = EMO[e].col, k = "#1F2A52", L = label ? ' aria-label="'.concat(EMO[e].en, " – ").concat(EMO[e].vi, '"') : ' aria-hidden="true"';
+  const eyes = {
+    happy: '<circle cx="38" cy="44" r="5"/><circle cx="62" cy="44" r="5"/>',
+    sad: '<circle cx="38" cy="46" r="5"/><circle cx="62" cy="46" r="5"/>',
+    calm: '<path d="M31 45q7 7 14 0M55 45q7 7 14 0" fill="none" stroke="#1F2A52" stroke-width="4" stroke-linecap="round"/>',
+    excited: '<path d="M38 36l3 7 7 1-5 5 1 7-6-4-6 4 1-7-5-5 7-1z M62 36l3 7 7 1-5 5 1 7-6-4-6 4 1-7-5-5 7-1z"/>',
+    surprised: '<circle cx="38" cy="44" r="7" fill="#fff" stroke="#1F2A52" stroke-width="3"/><circle cx="38" cy="44" r="3"/><circle cx="62" cy="44" r="7" fill="#fff" stroke="#1F2A52" stroke-width="3"/><circle cx="62" cy="44" r="3"/>',
+    angry: '<circle cx="38" cy="47" r="5"/><circle cx="62" cy="47" r="5"/>'
+  }[e];
+  const brow = { sad: '<path d="M30 36l12-5M70 36l-12-5"/>', surprised: '<path d="M30 30q8-6 15 0M55 30q8-6 15 0"/>', angry: '<path d="M29 33l14 6M71 33l-14 6"/>' }[e] || "";
+  const mouth = {
+    happy: '<path d="M32 60q18 18 36 0" fill="none"/>',
+    sad: '<path d="M35 70q15-12 30 0" fill="none"/>',
+    calm: '<path d="M38 63q12 8 24 0" fill="none"/>',
+    excited: '<path d="M31 58h38q-2 20-19 20t-19-20z" fill="#fff"/>',
+    surprised: '<ellipse cx="50" cy="67" rx="8" ry="10" fill="#fff"/>',
+    angry: '<path d="M36 68q14-6 28 0" fill="none"/>'
+  }[e];
+  const extra = e === "sad" ? '<path d="M64 52q4 8 0 11q-4-3 0-11z" fill="#9FD3FF" stroke="#1F2A52" stroke-width="2"/>' : e === "happy" || e === "excited" ? '<circle cx="28" cy="58" r="5" fill="#FF8DBA" opacity=".7"/><circle cx="72" cy="58" r="5" fill="#FF8DBA" opacity=".7"/>' : "";
+  return '<svg viewBox="0 0 100 100" role="img"'.concat(L, '><circle cx="50" cy="52" r="42" fill="').concat(c, '" stroke="').concat(k, '" stroke-width="4"/><g fill="').concat(k, '">').concat(eyes, '</g><g stroke="').concat(k, '" stroke-width="4" stroke-linecap="round" fill="none">').concat(brow, '</g><g stroke="').concat(k, '" stroke-width="4" stroke-linecap="round">').concat(mouth, "</g>").concat(extra, "</svg>");
+}
+(function() {
+  if (!window.PointerEvent) {
+    const M = { touchstart: "onpointerdown", touchmove: "onpointermove", touchend: "onpointerup", touchcancel: "onpointercancel" };
+    if (!Element.prototype.setPointerCapture) Element.prototype.setPointerCapture = function() {
+    };
+    let cur = null;
+    Object.keys(M).forEach((tp) => document.addEventListener(tp, (e) => {
+      const t = e.changedTouches[0];
+      if (!t) return;
+      let el = tp === "touchstart" ? e.target : cur;
+      if (tp === "touchstart") {
+        while (el && !el.onpointerdown) el = el.parentElement;
+        cur = el;
+      }
+      if (!el || !el[M[tp]]) return;
+      el[M[tp]]({ clientX: t.clientX, clientY: t.clientY, pointerId: 1, pointerType: "touch", target: e.target, preventDefault() {
+      } });
+      if (el.tagName === "CANVAS") e.preventDefault();
+      if (tp === "touchend" || tp === "touchcancel") cur = null;
+    }, { passive: false }));
+  }
+  const noAR = !(window.CSS && CSS.supports && CSS.supports("aspect-ratio", "1/1"));
+  const noGap = !(window.CSS && CSS.supports && CSS.supports("inset", "0"));
+  if (noGap) document.documentElement.classList.add("nogap");
+  if (noAR) {
+    const AR = [["#danceWrap", 16 / 10], [".scene", 4 / 3], [".blob", 1], [".stageWrap", 4 / 3], [".card img", 4 / 3], [".paper", 1], [".sw", 1], [".stage", 1]];
+    let q = 0;
+    const fix = () => {
+      q = 0;
+      AR.forEach(([s, r]) => document.querySelectorAll(s).forEach((el) => {
+        const w = el.getBoundingClientRect().width;
+        if (w) el.style.height = w / r + "px";
+      }));
+    };
+    const later = () => {
+      if (!q) q = requestAnimationFrame(fix);
+    };
+    window.addEventListener("resize", later);
+    window.addEventListener("load", later);
+    try {
+      new MutationObserver(later).observe(document.body, { childList: true, subtree: true });
+    } catch (e) {
+    }
+    later();
+  }
+  let unlocked = false;
+  function silentWav() {
+    const n = 800, b = new ArrayBuffer(44 + n), v = new DataView(b);
+    const w = (o, s2) => {
+      for (let i = 0; i < s2.length; i++) v.setUint8(o + i, s2.charCodeAt(i));
+    };
+    w(0, "RIFF");
+    v.setUint32(4, 36 + n, true);
+    w(8, "WAVE");
+    w(12, "fmt ");
+    v.setUint32(16, 16, true);
+    v.setUint16(20, 1, true);
+    v.setUint16(22, 1, true);
+    v.setUint32(24, 8e3, true);
+    v.setUint32(28, 8e3, true);
+    v.setUint16(32, 1, true);
+    v.setUint16(34, 8, true);
+    w(36, "data");
+    v.setUint32(40, n, true);
+    for (let i = 0; i < n; i++) v.setUint8(44 + i, 128);
+    let s = "";
+    new Uint8Array(b).forEach((x) => s += String.fromCharCode(x));
+    return "data:audio/wav;base64," + btoa(s);
+  }
+  window.unlockAudio = function() {
+    if (unlocked) return;
+    unlocked = true;
+    try {
+      if (navigator.audioSession) navigator.audioSession.type = "playback";
+    } catch (e) {
+    }
+    try {
+      const a = new Audio(silentWav());
+      a.setAttribute("playsinline", "");
+      const p = a.play();
+      if (p && p.catch) p.catch(() => {
+      });
+    } catch (e) {
+    }
+    try {
+      const c = Sfx.ac();
+      if (c) {
+        const s = c.createBufferSource();
+        s.buffer = c.createBuffer(1, 1, 22050);
+        s.connect(c.destination);
+        s.start(0);
+      }
+    } catch (e) {
+    }
+    try {
+      if ("speechSynthesis" in window) {
+        const u = new SpeechSynthesisUtterance(" ");
+        u.volume = 0;
+        speechSynthesis.speak(u);
+        Voice.pick && Voice.pick();
+      }
+    } catch (e) {
+    }
+  };
+  ["touchend", "pointerup", "click", "keydown"].forEach((t) => document.addEventListener(t, window.unlockAudio, { capture: true, passive: true }));
+  const touch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+  if (touch && !/index\.html$|\/$/.test(location.pathname.replace(/\?.*$/, "")) && !document.getElementById("startGate") && !window.NO_GATE) {
+    const g = document.createElement("div");
+    g.id = "startGate";
+    g.setAttribute("role", "dialog");
+    g.innerHTML = '<button type="button" id="startBtn"><span class="sg-bow">' + RAINBOW + "</span><b>Chạm để bắt đầu</b><small>Tap to start</small></button><p>🔔 iPhone: gạt nút bên hông sang <b>bật chuông</b> và tăng âm lượng để nghe Bạn Màu đọc.</p>";
+    document.body.appendChild(g);
+    document.getElementById("startBtn").addEventListener("click", () => {
+      window.unlockAudio();
+      g.remove();
+      setTimeout(() => {
+        try {
+          window.APP_START && window.APP_START();
+        } catch (e) {
+        }
+      }, 120);
+    });
+  }
+})();
+(function() {
+  if (!window.__EMBED) return;
+  document.addEventListener("click", function(e) {
+    var a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+    if (!a) return;
+    var h2 = a.getAttribute("href") || "";
+    if (/^(https?:|mailto:|tel:|#)/.test(h2)) return;
+    e.preventDefault();
+    try {
+      parent.postMessage({ cvcx: "go", href: h2 }, "*");
+    } catch (x) {
+    }
+  }, true);
+})();
+$("#logo").innerHTML = RAINBOW;
+bindVoiceBtn($("#voiceBtn"));
+function showTab(t) {
+  $$(".tab").forEach((b) => {
+    b.classList.toggle("on", b.dataset.t === t);
+    b.setAttribute("aria-selected", b.dataset.t === t);
+  });
+  ["hunt", "faces", "dance"].forEach((x) => $("#p-" + x).hidden = x !== t);
+  if (t !== "dance") {
+    stopAll();
+  } else {
+    requestAnimationFrame(sizeFx);
+  }
+  try {
+    history.replaceState(null, "", "#" + t);
+  } catch (e) {
+  }
+}
+$$(".tab").forEach((b) => b.onclick = () => showTab(b.dataset.t));
+const HC = [["red", "Đỏ", "#EF4A3C"], ["orange", "Cam", "#FF8B2B"], ["yellow", "Vàng", "#FFD23A"], ["green", "Xanh lá", "#2DB66B"], ["blue", "Xanh dương", "#2F7BEF"], ["purple", "Tím", "#8A55E0"], ["pink", "Hồng", "#FF8DBA"], ["brown", "Nâu", "#9A6136"]];
+let hN = 6, hSet = [], hTarget = null, hStars = 0, hTries = 0, hLock = false;
+function blobPath(seed) {
+  let d = "", pts = 9, r = [];
+  for (let i = 0; i < pts; i++) {
+    r.push(38 + (Math.sin(seed * 13.7 + i * 2.3) + 1) / 2 * 10);
+  }
+  const P = r.map((rr, i) => {
+    const a = i / pts * Math.PI * 2;
+    return [50 + Math.cos(a) * rr, 50 + Math.sin(a) * rr];
+  });
+  d = "M".concat((P[0][0] + P[pts - 1][0]) / 2, " ").concat((P[0][1] + P[pts - 1][1]) / 2);
+  for (let i = 0; i < pts; i++) {
+    const p = P[i], q = P[(i + 1) % pts];
+    d += " Q".concat(p[0].toFixed(1), " ").concat(p[1].toFixed(1), " ").concat(((p[0] + q[0]) / 2).toFixed(1), " ").concat(((p[1] + q[1]) / 2).toFixed(1));
+  }
+  return d + "Z";
+}
+function huntNew() {
+  hSet = shuffle(HC).slice(0, hN);
+  hTries = 0;
+  hLock = false;
+  let t;
+  do {
+    t = pick(hSet);
+  } while (hTarget && t[0] === hTarget[0] && hSet.length > 1);
+  hTarget = t;
+  $("#blobs").innerHTML = hSet.map((c, i) => '<button class="blob" data-c="'.concat(c[0], '" aria-label="').concat(c[1], '"><svg viewBox="0 0 100 100"><path d="').concat(blobPath(Math.random() * 99), '" fill="').concat(c[2], '" stroke="#1F2A52" stroke-width="3.5"/><ellipse cx="38" cy="36" rx="9" ry="5" fill="#fff" opacity=".45" transform="rotate(-25 38 36)"/></svg><span class="nm">').concat(c[0][0].toUpperCase() + c[0].slice(1), "</span></button>")).join("");
+  $$(".blob").forEach((b) => b.onclick = () => huntPick(b));
+  $("#huntQ").textContent = "Find ".concat(hTarget[0], "!");
+  $("#huntVi").textContent = "Bé tìm màu ".concat(hTarget[1].toLowerCase(), " nhé!");
+  huntSay();
+}
+function huntSay() {
+  Voice.say([["Find ".concat(hTarget[0], "!"), "en"], ["Bé tìm màu ".concat(hTarget[1].toLowerCase()), "vi"]]);
+}
+function huntPick(b) {
+  if (hLock) return;
+  const fb = $("#huntFb");
+  if (b.dataset.c === hTarget[0]) {
+    hLock = true;
+    b.classList.add("show");
+    if (hTries < 2) {
+      hStars++;
+    }
+    Sfx.good();
+    fb.className = "fb good";
+    fb.textContent = "🎉 ".concat(pick(["Great!", "Yes!", "Well done!"]), " This is ").concat(hTarget[0], "! Màu ").concat(hTarget[1].toLowerCase(), " – con giỏi quá!");
+    Voice.say([["Yes! ".concat(hTarget[0], "!"), "en"]]);
+    renderHuntStars();
+    if (hStars >= 5) {
+      setTimeout(() => {
+        confetti(120);
+        Sfx.win();
+        fb.textContent = "🏆 Hoan hô! Bé đã có 5 ngôi sao! You are a colour hunter!";
+        Voice.say([["You are a colour hunter!", "en"], ["Hoan hô bé!", "vi"]]);
+        hStars = 0;
+        setTimeout(() => {
+          renderHuntStars();
+          huntNew();
+        }, 2600);
+      }, 700);
+    } else setTimeout(huntNew, 1400);
+  } else {
+    hTries++;
+    b.classList.add("shake");
+    setTimeout(() => b.classList.remove("shake"), 500);
+    Sfx.bad();
+    fb.className = "fb try";
+    if (hTries >= 2) {
+      const r = $('.blob[data-c="'.concat(hTarget[0], '"]'));
+      r.classList.add("hint", "show");
+      fb.textContent = "💛 Màu ".concat(hTarget[1].toLowerCase(), " đây rồi! Con chạm vào nhé.");
+      Voice.say([["Here is ".concat(hTarget[0], "."), "en"]]);
+    } else {
+      fb.textContent = "😊 Chưa đúng, con thử lại nhé! Try again!";
+      Voice.say([["Try again!", "en"]]);
+    }
+  }
+}
+function renderHuntStars() {
+  $("#huntStars").innerHTML = starsHTML(hStars);
+}
+$$("#huntLvl button").forEach((b) => b.onclick = () => {
+  $$("#huntLvl button").forEach((x) => x.classList.toggle("on", x === b));
+  hN = +b.dataset.n;
+  huntNew();
+});
+$("#huntSay").onclick = huntSay;
+const FE = ["happy", "sad", "calm", "excited", "surprised", "angry"];
+let fMode = "explore", fTarget = null, fStars = 0, fTries = 0, fLock = false;
+function renderFaces() {
+  const list = fMode === "quiz" ? shuffle(FE) : FE;
+  $("#faces").innerHTML = list.map((e) => '<button class="face '.concat(fMode === "quiz" ? "hideLbl" : "", '" data-e="').concat(e, '">').concat(faceSVG(e, true), "<b>").concat(EMO[e].en, "</b><span>").concat(EMO[e].vi, "</span></button>")).join("");
+  $$(".face").forEach((b) => b.onclick = () => faceTap(b));
+}
+function faceTap(b) {
+  const e = b.dataset.e;
+  b.classList.remove("boing");
+  void b.offsetWidth;
+  b.classList.add("boing");
+  if (fMode === "explore") {
+    Sfx.pop();
+    Voice.say([["".concat(EMO[e].en, ". I feel ").concat(EMO[e].en.toLowerCase(), "."), "en"], [EMO[e].vi, "vi"]]);
+    $("#faceFb").className = "fb good";
+    $("#faceFb").textContent = "".concat(EMO[e].en, " – ").concat(EMO[e].vi, ". «I feel ").concat(EMO[e].en.toLowerCase(), ".» Khi nào con thấy ").concat(EMO[e].vi.toLowerCase(), "?");
+    return;
+  }
+  if (fLock) return;
+  const fb = $("#faceFb");
+  if (e === fTarget) {
+    fLock = true;
+    b.classList.remove("hideLbl");
+    if (fTries < 2) fStars++;
+    Sfx.good();
+    fb.className = "fb good";
+    fb.textContent = "🎉 Đúng rồi! This is ".concat(EMO[e].en.toLowerCase(), " – ").concat(EMO[e].vi.toLowerCase(), "!");
+    Voice.say([["Yes! ".concat(EMO[e].en, "!"), "en"]]);
+    $("#faceStars").innerHTML = starsHTML(fStars);
+    if (fStars >= 5) {
+      setTimeout(() => {
+        confetti(120);
+        Sfx.win();
+        fb.textContent = "🏆 Bé hiểu cảm xúc giỏi quá! 5 ngôi sao!";
+        fStars = 0;
+        setTimeout(faceQuiz, 2600);
+      }, 600);
+    } else setTimeout(faceQuiz, 1500);
+  } else {
+    fTries++;
+    b.classList.add("shake");
+    setTimeout(() => b.classList.remove("shake"), 500);
+    Sfx.bad();
+    fb.className = "fb try";
+    if (fTries >= 2) {
+      $('.face[data-e="'.concat(fTarget, '"]')).classList.add("hint");
+      $('.face[data-e="'.concat(fTarget, '"]')).classList.remove("hideLbl");
+      fb.textContent = "💛 Bạn ".concat(EMO[fTarget].vi.toLowerCase(), " ở đây nè!");
+    } else {
+      fb.textContent = "😊 Con nhìn kỹ đôi mắt và cái miệng nhé! Try again!";
+      Voice.say([["Try again!", "en"]]);
+    }
+  }
+}
+function faceQuiz() {
+  fTries = 0;
+  fLock = false;
+  let t;
+  do {
+    t = pick(FE);
+  } while (t === fTarget);
+  fTarget = t;
+  renderFaces();
+  $("#faceQ").textContent = "Who is ".concat(EMO[t].en.toLowerCase(), "?");
+  $("#faceVi").textContent = "Bạn nào đang ".concat(EMO[t].vi.toLowerCase(), "? Con tìm nhé!");
+  $("#faceFb").className = "fb";
+  $("#faceFb").textContent = "👀 Nhìn đôi mắt, lông mày và cái miệng của các bạn.";
+  faceSay();
+  $("#faceStars").innerHTML = starsHTML(fStars);
+}
+function faceSay() {
+  if (fMode === "quiz") Voice.say([["Who is ".concat(EMO[fTarget].en.toLowerCase(), "?"), "en"], ["Bạn nào đang ".concat(EMO[fTarget].vi.toLowerCase(), "?"), "vi"]]);
+  else Voice.say([["How do you feel?", "en"], ["Con cảm thấy thế nào?", "vi"]]);
+}
+$$("#faceMode button").forEach((b) => b.onclick = () => {
+  $$("#faceMode button").forEach((x) => x.classList.toggle("on", x === b));
+  fMode = b.dataset.m;
+  $("#faceStars").hidden = fMode !== "quiz";
+  if (fMode === "quiz") {
+    fStars = 0;
+    faceQuiz();
+  } else {
+    $("#faceQ").textContent = "How do you feel?";
+    $("#faceVi").textContent = "Chạm vào khuôn mặt để nghe tên cảm xúc. Con thấy mình giống bạn nào?";
+    renderFaces();
+  }
+});
+$("#faceSay").onclick = faceSay;
+let dEmo = "happy", dMagic = /* @__PURE__ */ new Set(), parts = [], raf = null;
+const fx = $("#fx"), fctx = fx.getContext("2d"), pic = $("#pic");
+const MAGIC = [["bounce", "🦘 Nhảy"], ["sway", "🌿 Lắc lư"], ["fly", "🎈 Bay"], ["spin", "💫 Rung rinh"], ["leaves", "🍂 Lá rơi"], ["stars", "✨ Sao lấp lánh"], ["bubbles", "🔵 Bong bóng"], ["night", "🌙 Trời đêm"]];
+$("#emoRow").innerHTML = FE.map((e) => '<button class="emoBtn '.concat(e === dEmo ? "on" : "", '" data-e="').concat(e, '">').concat(faceSVG(e)).concat(EMO[e].en, "</button>")).join("");
+$("#magicRow").innerHTML = MAGIC.map((m) => '<button class="btn sm magic" data-m="'.concat(m[0], '">').concat(m[1], "</button>")).join("");
+$$(".emoBtn").forEach((b) => b.onclick = () => {
+  dEmo = b.dataset.e;
+  $$(".emoBtn").forEach((x) => x.classList.toggle("on", x === b));
+  renderSentence();
+  if (Music.emo) Music.play(dEmo);
+  Sfx.pop();
+});
+$$(".magic").forEach((b) => b.onclick = () => {
+  const m = b.dataset.m;
+  const anims = ["bounce", "sway", "fly", "spin"];
+  if (anims.includes(m)) {
+    anims.forEach((a) => {
+      if (a !== m) {
+        dMagic.delete(a);
+        $('.magic[data-m="'.concat(a, '"]')).classList.remove("on");
+      }
+    });
+  }
+  dMagic.has(m) ? dMagic.delete(m) : dMagic.add(m);
+  b.classList.toggle("on", dMagic.has(m));
+  applyMagic();
+  Sfx.pop();
+});
+function applyMagic() {
+  pic.className = "";
+  ["bounce", "sway", "fly", "spin"].forEach((a) => {
+    if (dMagic.has(a)) pic.classList.add("anim-" + a);
+  });
+  $("#stage").classList.toggle("night", dMagic.has("night"));
+  if (!raf) loop();
+}
+function sizeFx() {
+  const r = $("#stage").getBoundingClientRect();
+  fx.width = r.width * devicePixelRatio;
+  fx.height = r.height * devicePixelRatio;
+}
+function spawn() {
+  const W = fx.width, H = fx.height, pal = EMO[dEmo].pal;
+  if (dMagic.has("leaves") && Math.random() < 0.25) parts.push({ k: "leaf", x: Math.random() * W, y: -20, vx: (Math.random() - 0.5) * 1.2, vy: 1 + Math.random() * 1.6, r: 10 + Math.random() * 10, a: Math.random() * 6, c: pick(["#FF8B2B", "#EF4A3C", "#FFC928", "#9A6136"]) });
+  if (dMagic.has("stars") && Math.random() < 0.3) parts.push({ k: "star", x: Math.random() * W, y: Math.random() * H, life: 60, r: 6 + Math.random() * 10, c: pick(pal) });
+  if (dMagic.has("bubbles") && Math.random() < 0.18) parts.push({ k: "bub", x: Math.random() * W, y: H + 20, vy: -(1 + Math.random() * 1.5), r: 10 + Math.random() * 22, c: pick(pal) });
+}
+function star(x, y, r) {
+  fctx.beginPath();
+  for (let i = 0; i < 10; i++) {
+    const a = i * Math.PI / 5 - Math.PI / 2, rr = i % 2 ? r * 0.45 : r;
+    fctx.lineTo(x + Math.cos(a) * rr, y + Math.sin(a) * rr);
+  }
+  fctx.closePath();
+}
+function loop() {
+  fctx.clearRect(0, 0, fx.width, fx.height);
+  spawn();
+  const s = devicePixelRatio;
+  parts = parts.filter((p) => {
+    if (p.k === "leaf") {
+      p.x += p.vx + Math.sin(p.y / 30);
+      p.y += p.vy * s;
+      p.a += 0.04;
+      fctx.save();
+      fctx.translate(p.x, p.y);
+      fctx.rotate(p.a);
+      fctx.fillStyle = p.c;
+      fctx.beginPath();
+      fctx.ellipse(0, 0, p.r * s, p.r * s * 0.5, 0, 0, 7);
+      fctx.fill();
+      fctx.restore();
+      return p.y < fx.height + 30;
+    }
+    if (p.k === "star") {
+      p.life--;
+      fctx.globalAlpha = Math.sin(p.life / 60 * Math.PI);
+      fctx.fillStyle = p.c;
+      star(p.x, p.y, p.r * s);
+      fctx.fill();
+      fctx.globalAlpha = 1;
+      return p.life > 0;
+    }
+    if (p.k === "bub") {
+      p.y += p.vy * s;
+      p.x += Math.sin(p.y / 40);
+      fctx.strokeStyle = p.c;
+      fctx.lineWidth = 3 * s;
+      fctx.globalAlpha = 0.8;
+      fctx.beginPath();
+      fctx.arc(p.x, p.y, p.r * s, 0, 7);
+      fctx.stroke();
+      fctx.globalAlpha = 1;
+      return p.y > -40;
+    }
+  });
+  if (dMagic.size || parts.length) raf = requestAnimationFrame(loop);
+  else {
+    raf = null;
+    fctx.clearRect(0, 0, fx.width, fx.height);
+  }
+}
+function stopAll() {
+  dMagic.clear();
+  $$(".magic").forEach((b) => b.classList.remove("on"));
+  parts = [];
+  applyMagic();
+  Music.stop();
+  $("#musicBtn").textContent = "🎵 Bật nhạc";
+}
+$("#musicBtn").onclick = () => {
+  if (Music.emo) {
+    Music.stop();
+    $("#musicBtn").textContent = "🎵 Bật nhạc";
+  } else {
+    Music.play(dEmo);
+    $("#musicBtn").textContent = "⏸ Tắt nhạc";
+  }
+};
+$("#stopBtn").onclick = stopAll;
+function renderSentence() {
+  $("#sentence").innerHTML = "My picture.<br>I feel <em>".concat(EMO[dEmo].en.toLowerCase(), "</em>.");
+}
+$("#speakS").onclick = () => Voice.say([["My picture. I feel ".concat(EMO[dEmo].en.toLowerCase(), "."), "en"], ["Tranh của con. Con thấy ".concat(EMO[dEmo].vi.toLowerCase(), "."), "vi"]]);
+$("#challenge").onclick = () => {
+  const c = pick(HC), th = pick([["something", "một thứ"], ["a dot", "một chấm tròn"], ["a line", "một nét kẻ"], ["a flower", "một bông hoa"], ["a friend", "một người bạn"]]);
+  $("#chText").textContent = "🎯 Add ".concat(th[0], " ").concat(c[0], "! Con thêm ").concat(th[1], " màu ").concat(c[1].toLowerCase(), " vào tranh nhé!");
+  Voice.say([["Add ".concat(th[0], " ").concat(c[0], "!"), "en"]]);
+};
+function sampleArt() {
+  const c = document.createElement("canvas");
+  c.width = 800;
+  c.height = 600;
+  const g = c.getContext("2d");
+  g.fillStyle = "#FFFDF6";
+  g.fillRect(0, 0, 800, 600);
+  g.fillStyle = "#BDE8A8";
+  g.fillRect(0, 470, 800, 130);
+  g.lineCap = "round";
+  g.lineJoin = "round";
+  g.fillStyle = "#FFC928";
+  g.beginPath();
+  g.arc(660, 110, 58, 0, 7);
+  g.fill();
+  g.strokeStyle = "#FFB000";
+  g.lineWidth = 8;
+  for (let i = 0; i < 10; i++) {
+    const a = i * Math.PI / 5;
+    g.beginPath();
+    g.moveTo(660 + Math.cos(a) * 78, 110 + Math.sin(a) * 78);
+    g.lineTo(660 + Math.cos(a) * 104, 110 + Math.sin(a) * 104);
+    g.stroke();
+  }
+  g.fillStyle = "#8A5A34";
+  g.beginPath();
+  g.moveTo(370, 480);
+  g.lineTo(385, 300);
+  g.lineTo(420, 300);
+  g.lineTo(440, 480);
+  g.closePath();
+  g.fill();
+  [["#EF4A3C", 330, 250, 90], ["#FF8B2B", 460, 240, 95], ["#FFC928", 400, 170, 95], ["#FF8B2B", 300, 170, 70], ["#EF4A3C", 505, 160, 70]].forEach(([col, x, y, r]) => {
+    g.fillStyle = col;
+    g.beginPath();
+    g.arc(x, y, r, 0, 7);
+    g.fill();
+  });
+  g.fillStyle = "#2DB66B";
+  for (let x = 10; x < 800; x += 26) {
+    g.beginPath();
+    g.moveTo(x, 480);
+    g.lineTo(x + 8, 445);
+    g.lineTo(x + 16, 480);
+    g.fill();
+  }
+  g.fillStyle = "#FF6FA8";
+  [[120, 500], [200, 520], [600, 510]].forEach(([x, y]) => {
+    for (let i = 0; i < 5; i++) {
+      const a = i * Math.PI * 2 / 5;
+      g.beginPath();
+      g.arc(x + Math.cos(a) * 14, y + Math.sin(a) * 14, 11, 0, 7);
+      g.fill();
+    }
+    g.fillStyle = "#FFC928";
+    g.beginPath();
+    g.arc(x, y, 9, 0, 7);
+    g.fill();
+    g.fillStyle = "#FF6FA8";
+  });
+  return c.toDataURL("image/jpeg", 0.9);
+}
+function setPic(src) {
+  pic.src = src;
+  $("#pad").hidden = true;
+  $("#padbar").hidden = true;
+  pic.hidden = false;
+}
+$("#sampleBtn").onclick = () => setPic(sampleArt());
+$("#upload").onchange = (e) => {
+  const f = e.target.files[0];
+  if (!f) return;
+  const r = new FileReader();
+  r.onload = () => {
+    const im = new Image();
+    im.onload = () => {
+      const c = document.createElement("canvas"), k = Math.min(1, 1200 / Math.max(im.width, im.height));
+      c.width = im.width * k;
+      c.height = im.height * k;
+      c.getContext("2d").drawImage(im, 0, 0, c.width, c.height);
+      setPic(c.toDataURL("image/jpeg", 0.88));
+      toast("Đã đưa tranh lên! Chọn cảm xúc và bật phép màu nhé ✨");
+    };
+    im.src = r.result;
+  };
+  r.readAsDataURL(f);
+  e.target.value = "";
+};
+const pad = $("#pad"), pctx = pad.getContext("2d");
+let pCol = "#EF4A3C", drawing = false;
+$("#padbar").innerHTML = HC.map((c) => '<button class="sw" data-c="'.concat(c[2], '" style="background:').concat(c[2], '" aria-label="').concat(c[1], '"></button>')).join("") + '<button class="btn sm" id="padClear">🧽 Xoá</button><button class="btn sm g" id="padDone">✅ Xong</button>';
+$("#drawBtn").onclick = () => {
+  const r = $("#stage").getBoundingClientRect();
+  pad.width = r.width * 2;
+  pad.height = r.height * 2;
+  pctx.fillStyle = "#fff";
+  pctx.fillRect(0, 0, pad.width, pad.height);
+  pad.hidden = false;
+  $("#padbar").hidden = false;
+  pic.hidden = true;
+  stopAll();
+  $$("#padbar .sw").forEach((b) => {
+    b.classList.toggle("on", b.dataset.c === pCol);
+    b.onclick = () => {
+      pCol = b.dataset.c;
+      $$("#padbar .sw").forEach((x) => x.classList.toggle("on", x === b));
+    };
+  });
+  $("#padClear").onclick = () => {
+    pctx.fillStyle = "#fff";
+    pctx.fillRect(0, 0, pad.width, pad.height);
+  };
+  $("#padDone").onclick = () => setPic(pad.toDataURL("image/png"));
+};
+const pp = (e) => {
+  const r = pad.getBoundingClientRect();
+  return [(e.clientX - r.left) * pad.width / r.width, (e.clientY - r.top) * pad.height / r.height];
+};
+pad.onpointerdown = (e) => {
+  drawing = true;
+  pad.setPointerCapture(e.pointerId);
+  const [x, y] = pp(e);
+  pctx.strokeStyle = pCol;
+  pctx.lineWidth = 16;
+  pctx.lineCap = "round";
+  pctx.lineJoin = "round";
+  pctx.beginPath();
+  pctx.moveTo(x, y);
+  pctx.lineTo(x + 0.1, y);
+  pctx.stroke();
+};
+pad.onpointermove = (e) => {
+  if (!drawing) return;
+  const [x, y] = pp(e);
+  pctx.lineTo(x, y);
+  pctx.stroke();
+};
+pad.onpointerup = pad.onpointercancel = () => drawing = false;
+window.addEventListener("resize", sizeFx);
+renderFaces();
+renderHuntStars();
+huntNew();
+setPic(sampleArt());
+renderSentence();
+sizeFx();
+window.APP_START = () => {
+  if (!$("#p-hunt").hidden) huntSay();
+  else if (!$("#p-faces").hidden) faceSay();
+};
+const h = (window.__HASH || location.hash || "").replace("#", "");
+if (["hunt", "faces", "dance"].includes(h)) showTab(h);
+</script>
+</body>
+</html>

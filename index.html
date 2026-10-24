@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Cầu Vồng Cảm Xúc</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@600;800;900&display=swap">
+<script>window.onerror = function(m, s, l, c) {
+  try {
+    var d = document.getElementById("errBanner");
+    if (!d) {
+      d = document.createElement("div");
+      d.id = "errBanner";
+      d.style.cssText = "position:fixed;left:8px;right:8px;bottom:8px;z-index:9999;background:#FFF1D9;color:#7A4500;border:3px solid #1F2A52;border-radius:14px;padding:10px 12px;font:600 14px/1.4 Arial,sans-serif";
+      (document.body || document.documentElement).appendChild(d);
+    }
+    d.textContent = "⚠️ Máy này báo lỗi: " + m + " (dòng " + l + "). Cô chụp màn hình gửi lại nhé.";
+  } catch (e) {
+  }
+};
+</script><style>:root {
+  --ink:#1F2A52;
+  --ink-soft:#4A5582;
+  --muted:#6A759E;
+  --paper:#FFFFFF;
+  --ground:#EEF4FF;
+  --dot:#D8E3FA;
+  --line:#D3DDF3;
+  --red:#EF4A3C;
+  --orange:#FF8B2B;
+  --yellow:#FFC928;
+  --green:#2DB66B;
+  --blue:#2F7BEF;
+  --purple:#8A55E0;
+  --pink:#FF6FA8;
+  --brown:#9A6136;
+  --good:#E3F8EC;
+  --good-ink:#0F7A43;
+  --try:#FFF1D9;
+  --try-ink:#9A5A00;
+  --display:"Baloo 2","Nunito","Segoe UI Rounded","Segoe UI",Arial,sans-serif;
+  --body:"Nunito","Segoe UI",Arial,sans-serif;
+  color-scheme: light;
+}
+* {
+  box-sizing: border-box;
+}
+[hidden] {
+  display: none !important;
+}
+html,
+body {
+  margin: 0;
+}
+body {
+  font-family: var(--body);
+  color: var(--ink);
+  background-color: var(--ground);
+  background-image: radial-gradient(var(--dot) 1.4px, transparent 1.6px);
+  background-size: 22px 22px;
+  min-height: 100vh;
+  -webkit-tap-highlight-color: transparent;
+}
+button,
+a,
+label,
+select,
+input {
+  touch-action: manipulation;
+}
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 4px solid var(--blue);
+  outline-offset: 3px;
+}
+h1,
+h2,
+h3 {
+  font-family: var(--display);
+  line-height: 1.1;
+  margin: 0;
+  text-wrap: balance;
+}
+.wrap {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding-block: 14px 28px;
+  padding-left: max(14px, env(safe-area-inset-left, 0px));
+  padding-right: max(14px, env(safe-area-inset-right, 0px));
+}
+.sticker {
+  background: var(--paper);
+  border: 3px solid var(--ink);
+  border-radius: 22px;
+  box-shadow: 0 5px 0 var(--ink);
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 3px solid var(--ink);
+  border-radius: 16px;
+  background: var(--paper);
+  box-shadow: 0 4px 0 var(--ink);
+  padding: 10px 16px;
+  font-weight: 900;
+  font-size: 1rem;
+  text-decoration: none;
+  color: var(--ink);
+  transition: transform .08s, box-shadow .08s;
+  white-space: nowrap;
+}
+.btn:hover {
+  transform: translateY(-1px);
+}
+.btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--ink);
+}
+.btn[disabled] {
+  opacity: .4;
+  cursor: not-allowed;
+  transform: none;
+}
+.btn.y {
+  background: var(--yellow);
+}
+.btn.g {
+  background: var(--green);
+  color: #fff;
+}
+.btn.b {
+  background: var(--blue);
+  color: #fff;
+}
+.btn.p {
+  background: var(--pink);
+  color: #fff;
+}
+.btn.o {
+  background: var(--orange);
+  color: #fff;
+}
+.btn.v {
+  background: var(--purple);
+  color: #fff;
+}
+.btn.sm {
+  padding: 7px 11px;
+  font-size: .9rem;
+  border-radius: 13px;
+  box-shadow: 0 3px 0 var(--ink);
+}
+.btn.on {
+  background: var(--ink);
+  color: #fff;
+}
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 10px 14px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.brand .mark {
+  width: 52px;
+  height: 52px;
+  flex: none;
+}
+.brand h1 {
+  font-size: clamp(1.35rem, 3.2vw, 2rem);
+  font-weight: 800;
+}
+.brand p {
+  margin: 0;
+  font-weight: 800;
+  color: var(--ink-soft);
+  font-size: .92rem;
+}
+.tools {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 900;
+  font-size: .85rem;
+  padding: 4px 11px;
+  border-radius: 99px;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+}
+.foot {
+  text-align: center;
+  color: var(--muted);
+  font-weight: 800;
+  font-size: .85rem;
+  margin-top: 16px;
+  line-height: 1.5;
+}
+.stars {
+  display: inline-flex;
+  gap: 3px;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+.stars i {
+  font-style: normal;
+  filter: grayscale(1) opacity(.35);
+  transition: filter .3s, transform .3s;
+}
+.stars i.on {
+  filter: none;
+  transform: scale(1.15);
+}
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%) translateY(140%);
+  background: var(--ink);
+  color: #fff;
+  font-weight: 900;
+  padding: 12px 20px;
+  border-radius: 16px;
+  z-index: 200;
+  transition: transform .3s;
+  max-width: 90vw;
+  text-align: center;
+}
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+}
+.confetti {
+  position: fixed;
+  top: -20px;
+  width: 11px;
+  height: 16px;
+  border-radius: 3px;
+  pointer-events: none;
+  z-index: 300;
+  animation: fall 1.9s linear forwards;
+}
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: .85;
+  }
+}
+@keyframes pop {
+  0% {
+    transform: scale(.9);
+  }
+  60% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-9px);
+  }
+  40% {
+    transform: translateX(9px);
+  }
+  60% {
+    transform: translateX(-6px);
+  }
+  80% {
+    transform: translateX(6px);
+  }
+}
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 201, 40, .9), 0 4px 0 var(--ink);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(255, 201, 40, 0), 0 4px 0 var(--ink);
+  }
+}
+@keyframes floaty {
+  0%, 100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(3deg);
+  }
+}
+.shake {
+  animation: shake .45s;
+}
+.pulse {
+  animation: pulse 1s infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition: none !important;
+  }
+}
+@media print {
+  body {
+    background: #fff;
+  }
+}
+#startGate {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 500;
+  background: rgba(238, 244, 255, .97);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+}
+#startGate button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--yellow);
+  border: 4px solid var(--ink);
+  border-radius: 32px;
+  box-shadow: 0 8px 0 var(--ink);
+  padding: 22px 40px;
+  animation: pulse 1.4s infinite;
+  cursor: pointer;
+}
+#startGate .sg-bow .mark {
+  width: 110px;
+  height: 110px;
+}
+#startGate b {
+  font-family: var(--display);
+  font-size: 2.2rem;
+  line-height: 1.1;
+}
+#startGate small {
+  font-weight: 900;
+  font-size: 1.1rem;
+  color: var(--ink-soft);
+}
+#startGate p {
+  max-width: 340px;
+  font-weight: 800;
+  color: var(--ink-soft);
+  margin: 22px 0 0;
+  line-height: 1.5;
+}
+.nogap .tools > *,
+.nogap .row > *,
+.nogap .tags > *,
+.nogap .brand > *,
+.nogap .bottom > *,
+.nogap .rooms > *,
+.nogap .themes > *,
+.nogap .thumbs > *,
+.nogap .dots > *,
+.nogap .stars > *,
+.nogap .bar > *,
+.nogap .pdots > *,
+.nogap .sdots > *,
+.nogap .words > *,
+.nogap .padbar > *,
+.nogap .sizes > *,
+.nogap .meter > *,
+.nogap .prompt > *,
+.nogap .tab > *,
+.nogap .top > *,
+.nogap .ghead > *,
+.nogap .phead > *,
+.nogap .chead > *,
+.nogap .ph > *,
+.nogap .topbar > * {
+  margin: 4px;
+}
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+  padding: 22px 24px;
+  margin-top: 4px;
+}
+.hero h1 {
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  font-weight: 800;
+  letter-spacing: -.01em;
+}
+.hero h1 span {
+  background:
+    linear-gradient(
+      90deg,
+      #EF4A3C,
+      #FF8B2B,
+      #E8A800,
+      #2DB66B,
+      #2F7BEF,
+      #8A55E0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hero p {
+  font-weight: 800;
+  font-size: 1.08rem;
+  color: var(--ink-soft);
+  margin: 8px 0 0;
+  max-width: 60ch;
+}
+.motto {
+  display: inline-block;
+  margin-top: 12px;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--purple);
+}
+.bow {
+  width: 100%;
+  max-width: 360px;
+  justify-self: center;
+}
+.flow {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 16px;
+}
+.fl {
+  border: 3px solid var(--ink);
+  border-radius: 16px;
+  padding: 8px 10px;
+  background: var(--fc);
+  color: #fff;
+  box-shadow: 0 4px 0 var(--ink);
+}
+.fl b {
+  font-family: var(--display);
+  font-size: 1.35rem;
+  line-height: 1;
+  display: block;
+}
+.fl small {
+  font-weight: 800;
+  font-size: .78rem;
+  opacity: .95;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+.app {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: transform .12s;
+}
+.app:hover {
+  transform: translateY(-3px);
+}
+.app .top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.app .ic {
+  width: 62px;
+  height: 62px;
+  flex: none;
+  border-radius: 18px;
+  border: 3px solid var(--ink);
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+  background: var(--ac);
+}
+.app .no {
+  font-weight: 900;
+  font-size: .8rem;
+  color: var(--muted);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.app h2 {
+  font-size: 1.55rem;
+}
+.app p {
+  margin: 0;
+  font-weight: 700;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+.app .tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 6px;
+}
+.app .go {
+  align-self: flex-start;
+  margin-top: 6px;
+}
+.who {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+.who .sticker {
+  padding: 16px;
+}
+.who h3 {
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+}
+.who ol {
+  margin: 0;
+  padding-left: 1.2em;
+  font-weight: 800;
+  line-height: 1.7;
+}
+@media (max-width: 760px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+  .bow {
+    max-width: 240px;
+  }
+  .flow {
+    grid-template-columns: repeat(5, minmax(96px, 1fr));
+    overflow-x: auto;
+  }
+}
+#appLayer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 400;
+  background: var(--ground);
+}
+#appLayer iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+#appLoading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 401;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 900 1.3rem var(--body);
+  color: var(--ink);
+  background: var(--ground);
+}
+</style>
+</head>
+<body>
+<div class="wrap"><div id="nojs" style="margin:10px auto;max-width:900px;background:#FFF1D9;color:#7A4500;border:3px solid #1F2A52;border-radius:14px;padding:12px 14px;font:700 16px/1.5 Arial,sans-serif">⚠️ Máy đang chỉ <b>xem trước</b> file nên trò chơi chưa chạy. Trên điện thoại hãy mở bằng <b>đường link (quét mã QR)</b> trong Safari hoặc Chrome, không mở file trong Zalo, Tệp hay Drive.</div><script>(function() {
+  var n = document.getElementById("nojs");
+  if (n) n.parentNode.removeChild(n);
+})();
+</script>
+  <section class="hero sticker">
+    <div>
+      <div class="chip">🏆 Giải thưởng Tiên phong Ứng dụng AI trong Giáo dục 2026 · Bảng A Mầm non</div>
+      <h1 style="margin-top:12px"><span>Cầu Vồng Cảm Xúc</span></h1>
+      <p>Bộ 5 sản phẩm số giúp trẻ 5–6 tuổi chủ động sáng tạo nghệ thuật, gọi tên cảm xúc và làm quen tiếng Anh. Trẻ tạo trước, AI đáp sau.</p>
+      <span class="motto">Bé sáng tạo – AI đồng hành – Cảm xúc thành lời</span>
+    </div>
+    <svg class="bow" viewBox="0 0 240 150" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-width="14"><path d="M20 130a100 100 0 0 1 200 0" stroke="#EF4A3C"/><path d="M36 130a84 84 0 0 1 168 0" stroke="#FF8B2B"/><path d="M52 130a68 68 0 0 1 136 0" stroke="#FFC928"/><path d="M68 130a52 52 0 0 1 104 0" stroke="#2DB66B"/><path d="M84 130a36 36 0 0 1 72 0" stroke="#2F7BEF"/></g><circle cx="26" cy="132" r="18" fill="#fff" stroke="#1F2A52" stroke-width="4"/><circle cx="214" cy="132" r="18" fill="#fff" stroke="#1F2A52" stroke-width="4"/><circle cx="120" cy="104" r="16" fill="#FFC928" stroke="#1F2A52" stroke-width="4"/><circle cx="114" cy="101" r="2.5" fill="#1F2A52"/><circle cx="126" cy="101" r="2.5" fill="#1F2A52"/><path d="M113 109q7 6 14 0" stroke="#1F2A52" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+  </section>
+  <div class="flow" aria-label="Quy trình 5 bước">
+    <div class="fl" style="--fc:#EF4A3C"><b>NGHE</b><small>Listen · ≤ 4 phút màn hình</small></div>
+    <div class="fl" style="--fc:#FF8B2B"><b>NGẮM</b><small>Look · ≤ 3 phút</small></div>
+    <div class="fl" style="--fc:#C99000"><b>TÌM</b><small>Find · 0 phút</small></div>
+    <div class="fl" style="--fc:#2DB66B"><b>TẠO</b><small>Create · 0 phút</small></div>
+    <div class="fl" style="--fc:#2F7BEF"><b>KỂ</b><small>Share · ≤ 3 phút</small></div>
+  </div>
+  <div class="grid">
+    <a class="app sticker" href="1-bang-dieu-khien.html"><div class="top"><span class="ic" style="--ac:#FFE27A">📺</span><div><div class="no">Sản phẩm 1 · cô dùng trên TV</div><h2>Bảng Điều Khiển</h2></div></div>
+      <p>Điều khiển cả 5 bước: nhạc theo 4 cảm xúc, «Vũ điệu sắc màu» biến chuyển động thành nét màu (không hiện hình trẻ), truyện dở dang, thẻ săn vật liệu, màn hình nghỉ, đồng hồ màn hình, «Cô ghi nhanh».</p>
+      <div class="tags"><span class="chip">Nghe</span><span class="chip">Ngắm</span><span class="chip">Tìm</span><span class="chip">Tạo</span><span class="chip">Kể</span></div><span class="btn y go">Mở bảng điều khiển ➜</span></a>
+    <a class="app sticker" href="2-xuong-mau-ky-dieu.html"><div class="top"><span class="ic" style="--ac:#FFC2D9">🎨</span><div><div class="no">Sản phẩm 2 · 3 trò chơi</div><h2>Xưởng Màu Kỳ Diệu</h2></div></div>
+      <p>Săn Sắc Màu (nghe «Find red!»), Mặt Cười Biết Nói (6 cảm xúc, đố «Who is calm?»), Tranh Em Biết Múa (đưa ảnh tranh của bé lên để tranh nhảy, lá rơi, có nhạc).</p>
+      <div class="tags"><span class="chip">Ngắm</span><span class="chip">Nghe</span><span class="chip">Kể</span></div><span class="btn y go">Vào xưởng màu ➜</span></a>
+    <a class="app sticker" href="3-bao-tang-ti-hon-3d.html"><div class="top"><span class="ic" style="--ac:#C9F0D9">🏛️</span><div><div class="no">Sản phẩm 3 · 100 hình 3D</div><h2>Bảo Tàng Tí Hon 3D</h2></div></div>
+      <p>10 phòng chủ đề mầm non × 10 hình song ngữ, trợ lý «Bạn Màu» đọc mẫu, đố vui «Where is…?», tự tham quan và phòng «Tranh Của Lớp Em» để treo tranh thật của trẻ.</p>
+      <div class="tags"><span class="chip">Ngắm</span><span class="chip">Kể</span><span class="chip">Ở nhà cùng cha mẹ</span></div><span class="btn y go">Tham quan bảo tàng ➜</span></a>
+    <a class="app sticker" href="4-be-kheo-tay.html"><div class="top"><span class="ic" style="--ac:#CFE3FF">🖍️</span><div><div class="no">Sản phẩm 4 · 60 tranh</div><h2>Bé Khéo Tay</h2></div></div>
+      <p>Vở tô màu 10 chủ đề × 6 tranh: đổ màu, cọ vẽ, tẩy, quay lại, phóng to, đo phần đã tô, khen khi xong, in A4 dọc/ngang hoặc in tranh trắng để tô bằng sáp.</p>
+      <div class="tags"><span class="chip">Tạo</span><span class="chip">Ở nhà</span></div><span class="btn y go">Tô màu thôi ➜</span></a>
+    <a class="app sticker" href="5-be-vui-hoc-mau.html"><div class="top"><span class="ic" style="--ac:#E6D8FF">🌈</span><div><div class="no">Sản phẩm 5 · 90 câu đố</div><h2>Bé Vui Học Màu</h2></div></div>
+      <p>Đố màu song ngữ (10 chủ đề, 90 câu) và Nối màu. Đúng: khen, tặng sao. Sai: động viên. Sai 2 lần: hiện đáp án. Mỗi hình chỉ có một màu rõ ràng.</p>
+      <div class="tags"><span class="chip">Ngắm</span><span class="chip">Củng cố</span></div><span class="btn y go">Chơi đố màu ➜</span></a>
+    <div class="app sticker" style="background:#F3F7FF"><div class="top"><span class="ic" style="--ac:#fff">🛡️</span><div><div class="no">Dùng AI có trách nhiệm</div><h2>Quy tắc 5 KHÔNG</h2></div></div>
+      <ol style="margin:0;padding-left:1.2em;font-weight:800;line-height:1.65"><li>Trẻ không tự dùng, không trò chuyện với AI</li><li>Không đưa tên, ảnh, giọng trẻ lên AI</li><li>Không dùng hình AI làm mẫu cho trẻ chép</li><li>Không chiếu học liệu chưa kiểm duyệt</li><li>Không quá 10 phút màn hình/hoạt động</li></ol></div>
+  </div>
+  <div class="who">
+    <div class="sticker"><h3>Cách dùng ở lớp</h3><ol><li>Mở «Bảng Điều Khiển» trên máy nối TV.</li><li>Làm lần lượt 5 bước; bước TẠO bấm tắt màn hình.</li><li>Cuối giờ chụp tranh (không chụp mặt trẻ), treo vào Bảo Tàng.</li></ol></div>
+    <div class="sticker"><h3>Cách dùng ở nhà</h3><ol><li>Cha mẹ quét mã QR bằng camera điện thoại, mở bằng Safari hoặc Chrome. Không cần cài đặt.</li><li>Bé chơi Bé Vui Học Màu, Bé Khéo Tay 10–15 phút.</li><li>Cùng con xem Bảo Tàng và nói «I feel happy».</li><li>iPhone: bấm «Chạm để bắt đầu», gạt nút bên hông sang bật chuông để nghe tiếng.</li></ol></div>
+    <div class="sticker"><h3>Tác giả</h3><p style="margin:0;font-weight:800;line-height:1.6">Phạm Thị Thanh Thuỷ · Giáo viên Mẫu giáo 5–6 tuổi<br>Trường Mầm non Bất Bạt C, xã Bất Bạt, Hà Nội<br><span style="color:var(--muted)">Mã nguồn viết với hỗ trợ của Claude; cô thiết kế, thử ở lớp và duyệt bản cuối.</span></p></div>
+  </div>
+  <p class="foot">Chạy trên Chrome, Edge, Safari · máy tính, máy tính bảng, điện thoại Android, iOS · Không đăng nhập, không quảng cáo, không thu dữ liệu của trẻ</p>
+</div>
+<div id="appLayer" hidden><iframe id="appFrame" title="Trò chơi" allow="autoplay; fullscreen; camera; microphone"></iframe></div>
+<div id="appLoading" hidden>🌈 Đang mở trò chơi…</div>
+<script>(function() {
+  var cache = {}, layer = document.getElementById("appLayer"), frame = document.getElementById("appFrame"), loading = document.getElementById("appLoading");
+  function close() {
+    layer.hidden = true;
+    frame.srcdoc = "";
+    frame.removeAttribute("srcdoc");
+    document.body.style.overflow = "";
+  }
+  function open(href) {
+    var parts = href.split("#"), file = parts[0], hash = parts[1] || "";
+    if (!file || file === "index.html") {
+      close();
+      return;
+    }
+    loading.hidden = false;
+    var go = function(html) {
+      var inj = "<script>window.__EMBED=1;window.__HASH=" + JSON.stringify(hash) + ";<\/script>";
+      html = /<head[^>]*>/i.test(html) ? html.replace(/<head[^>]*>/i, function(m) {
+        return m + '<base href="' + location.href.replace(/[#?].*$/, "").replace(/[^\/]*$/, "") + '">' + inj;
+      }) : inj + html;
+      frame.srcdoc = html;
+      layer.hidden = false;
+      loading.hidden = true;
+      document.body.style.overflow = "hidden";
+      try {
+        window.scrollTo(0, 0);
+      } catch (e) {
+      }
+    };
+    if (cache[file]) {
+      go(cache[file]);
+      return;
+    }
+    fetch(file).then(function(r) {
+      if (!r.ok) throw 0;
+      return r.text();
+    }).then(function(h) {
+      cache[file] = h;
+      go(h);
+    }).catch(function() {
+      loading.hidden = true;
+      location.href = href;
+    });
+  }
+  document.addEventListener("click", function(e) {
+    var a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+    if (!a) return;
+    var h = a.getAttribute("href") || "";
+    if (/^(https?:|mailto:|tel:|#)/.test(h)) return;
+    if (location.protocol === "file:") return;
+    e.preventDefault();
+    open(h);
+  }, true);
+  window.addEventListener("message", function(e) {
+    var d = e.data;
+    if (d && d.cvcx === "go") open(d.href);
+  });
+})();
+</script>
+
+</body>
+</html>

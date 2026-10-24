@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Bé Khéo Tay</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@600;800;900&display=swap">
+<script>window.onerror = function(m, s, l, c) {
+  try {
+    var d = document.getElementById("errBanner");
+    if (!d) {
+      d = document.createElement("div");
+      d.id = "errBanner";
+      d.style.cssText = "position:fixed;left:8px;right:8px;bottom:8px;z-index:9999;background:#FFF1D9;color:#7A4500;border:3px solid #1F2A52;border-radius:14px;padding:10px 12px;font:600 14px/1.4 Arial,sans-serif";
+      (document.body || document.documentElement).appendChild(d);
+    }
+    d.textContent = "⚠️ Máy này báo lỗi: " + m + " (dòng " + l + "). Cô chụp màn hình gửi lại nhé.";
+  } catch (e) {
+  }
+};
+</script><style>:root {
+  --ink:#1F2A52;
+  --ink-soft:#4A5582;
+  --muted:#6A759E;
+  --paper:#FFFFFF;
+  --ground:#EEF4FF;
+  --dot:#D8E3FA;
+  --line:#D3DDF3;
+  --red:#EF4A3C;
+  --orange:#FF8B2B;
+  --yellow:#FFC928;
+  --green:#2DB66B;
+  --blue:#2F7BEF;
+  --purple:#8A55E0;
+  --pink:#FF6FA8;
+  --brown:#9A6136;
+  --good:#E3F8EC;
+  --good-ink:#0F7A43;
+  --try:#FFF1D9;
+  --try-ink:#9A5A00;
+  --display:"Baloo 2","Nunito","Segoe UI Rounded","Segoe UI",Arial,sans-serif;
+  --body:"Nunito","Segoe UI",Arial,sans-serif;
+  color-scheme: light;
+}
+* {
+  box-sizing: border-box;
+}
+[hidden] {
+  display: none !important;
+}
+html,
+body {
+  margin: 0;
+}
+body {
+  font-family: var(--body);
+  color: var(--ink);
+  background-color: var(--ground);
+  background-image: radial-gradient(var(--dot) 1.4px, transparent 1.6px);
+  background-size: 22px 22px;
+  min-height: 100vh;
+  -webkit-tap-highlight-color: transparent;
+}
+button,
+a,
+label,
+select,
+input {
+  touch-action: manipulation;
+}
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 4px solid var(--blue);
+  outline-offset: 3px;
+}
+h1,
+h2,
+h3 {
+  font-family: var(--display);
+  line-height: 1.1;
+  margin: 0;
+  text-wrap: balance;
+}
+.wrap {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding-block: 14px 28px;
+  padding-left: max(14px, env(safe-area-inset-left, 0px));
+  padding-right: max(14px, env(safe-area-inset-right, 0px));
+}
+.sticker {
+  background: var(--paper);
+  border: 3px solid var(--ink);
+  border-radius: 22px;
+  box-shadow: 0 5px 0 var(--ink);
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 3px solid var(--ink);
+  border-radius: 16px;
+  background: var(--paper);
+  box-shadow: 0 4px 0 var(--ink);
+  padding: 10px 16px;
+  font-weight: 900;
+  font-size: 1rem;
+  text-decoration: none;
+  color: var(--ink);
+  transition: transform .08s, box-shadow .08s;
+  white-space: nowrap;
+}
+.btn:hover {
+  transform: translateY(-1px);
+}
+.btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--ink);
+}
+.btn[disabled] {
+  opacity: .4;
+  cursor: not-allowed;
+  transform: none;
+}
+.btn.y {
+  background: var(--yellow);
+}
+.btn.g {
+  background: var(--green);
+  color: #fff;
+}
+.btn.b {
+  background: var(--blue);
+  color: #fff;
+}
+.btn.p {
+  background: var(--pink);
+  color: #fff;
+}
+.btn.o {
+  background: var(--orange);
+  color: #fff;
+}
+.btn.v {
+  background: var(--purple);
+  color: #fff;
+}
+.btn.sm {
+  padding: 7px 11px;
+  font-size: .9rem;
+  border-radius: 13px;
+  box-shadow: 0 3px 0 var(--ink);
+}
+.btn.on {
+  background: var(--ink);
+  color: #fff;
+}
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 10px 14px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.brand .mark {
+  width: 52px;
+  height: 52px;
+  flex: none;
+}
+.brand h1 {
+  font-size: clamp(1.35rem, 3.2vw, 2rem);
+  font-weight: 800;
+}
+.brand p {
+  margin: 0;
+  font-weight: 800;
+  color: var(--ink-soft);
+  font-size: .92rem;
+}
+.tools {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 900;
+  font-size: .85rem;
+  padding: 4px 11px;
+  border-radius: 99px;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+}
+.foot {
+  text-align: center;
+  color: var(--muted);
+  font-weight: 800;
+  font-size: .85rem;
+  margin-top: 16px;
+  line-height: 1.5;
+}
+.stars {
+  display: inline-flex;
+  gap: 3px;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+.stars i {
+  font-style: normal;
+  filter: grayscale(1) opacity(.35);
+  transition: filter .3s, transform .3s;
+}
+.stars i.on {
+  filter: none;
+  transform: scale(1.15);
+}
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%) translateY(140%);
+  background: var(--ink);
+  color: #fff;
+  font-weight: 900;
+  padding: 12px 20px;
+  border-radius: 16px;
+  z-index: 200;
+  transition: transform .3s;
+  max-width: 90vw;
+  text-align: center;
+}
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+}
+.confetti {
+  position: fixed;
+  top: -20px;
+  width: 11px;
+  height: 16px;
+  border-radius: 3px;
+  pointer-events: none;
+  z-index: 300;
+  animation: fall 1.9s linear forwards;
+}
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: .85;
+  }
+}
+@keyframes pop {
+  0% {
+    transform: scale(.9);
+  }
+  60% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-9px);
+  }
+  40% {
+    transform: translateX(9px);
+  }
+  60% {
+    transform: translateX(-6px);
+  }
+  80% {
+    transform: translateX(6px);
+  }
+}
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 201, 40, .9), 0 4px 0 var(--ink);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(255, 201, 40, 0), 0 4px 0 var(--ink);
+  }
+}
+@keyframes floaty {
+  0%, 100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(3deg);
+  }
+}
+.shake {
+  animation: shake .45s;
+}
+.pulse {
+  animation: pulse 1s infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition: none !important;
+  }
+}
+@media print {
+  body {
+    background: #fff;
+  }
+}
+#startGate {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 500;
+  background: rgba(238, 244, 255, .97);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+}
+#startGate button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--yellow);
+  border: 4px solid var(--ink);
+  border-radius: 32px;
+  box-shadow: 0 8px 0 var(--ink);
+  padding: 22px 40px;
+  animation: pulse 1.4s infinite;
+  cursor: pointer;
+}
+#startGate .sg-bow .mark {
+  width: 110px;
+  height: 110px;
+}
+#startGate b {
+  font-family: var(--display);
+  font-size: 2.2rem;
+  line-height: 1.1;
+}
+#startGate small {
+  font-weight: 900;
+  font-size: 1.1rem;
+  color: var(--ink-soft);
+}
+#startGate p {
+  max-width: 340px;
+  font-weight: 800;
+  color: var(--ink-soft);
+  margin: 22px 0 0;
+  line-height: 1.5;
+}
+.nogap .tools > *,
+.nogap .row > *,
+.nogap .tags > *,
+.nogap .brand > *,
+.nogap .bottom > *,
+.nogap .rooms > *,
+.nogap .themes > *,
+.nogap .thumbs > *,
+.nogap .dots > *,
+.nogap .stars > *,
+.nogap .bar > *,
+.nogap .pdots > *,
+.nogap .sdots > *,
+.nogap .words > *,
+.nogap .padbar > *,
+.nogap .sizes > *,
+.nogap .meter > *,
+.nogap .prompt > *,
+.nogap .tab > *,
+.nogap .top > *,
+.nogap .ghead > *,
+.nogap .phead > *,
+.nogap .chead > *,
+.nogap .ph > *,
+.nogap .topbar > * {
+  margin: 4px;
+}
+.themes {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 12px 2px 6px;
+}
+.th {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 3px solid var(--ink);
+  border-radius: 14px;
+  background: var(--paper);
+  box-shadow: 0 3px 0 var(--ink);
+  font-weight: 900;
+  font-size: .9rem;
+}
+.th.on {
+  background: var(--ink);
+  color: #fff;
+}
+.thumbs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 2px 10px;
+}
+.tb {
+  flex: none;
+  width: 86px;
+  border: 3px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+  padding: 4px;
+  font-weight: 800;
+  font-size: .72rem;
+  text-align: center;
+  position: relative;
+}
+.tb svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.tb.on {
+  border-color: var(--ink);
+  box-shadow: 0 3px 0 var(--ink);
+}
+.tb .done {
+  position: absolute;
+  top: -8px;
+  right: -6px;
+  font-size: 1rem;
+}
+.work {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 290px;
+  gap: 16px;
+  align-items: start;
+}
+.canvasBox {
+  padding: 12px;
+  min-width: 0;
+}
+.chead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.chead h2 {
+  font-size: 1.5rem;
+}
+.chead h2 small {
+  font-size: 1rem;
+  color: var(--muted);
+  font-family: var(--body);
+}
+.meter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 900;
+}
+.meter .bar {
+  width: 120px;
+  height: 14px;
+  border: 2px solid var(--ink);
+  border-radius: 99px;
+  overflow: hidden;
+  background: #fff;
+}
+.meter .bar i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background:
+    linear-gradient(
+      90deg,
+      var(--green),
+      var(--yellow));
+  transition: width .3s;
+}
+.scroller {
+  overflow: auto;
+  border: 3px dashed var(--line);
+  border-radius: 18px;
+  background: #fff;
+  max-height: 72vh;
+}
+.paper {
+  position: relative;
+  width: min(100%, 70vh);
+  aspect-ratio: 1/1;
+  margin: 0 auto;
+  transform-origin: 0 0;
+}
+.paper svg,
+.paper canvas {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+#fillLayer .f {
+  fill: #fff;
+  cursor: pointer;
+  transition: fill .15s;
+}
+#lineLayer {
+  pointer-events: none;
+}
+#lineLayer .f,
+#lineLayer .d {
+  fill: none;
+  stroke: #1F2A52;
+  stroke-width: 5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+#lineLayer .k {
+  fill: #1F2A52;
+}
+#brush {
+  pointer-events: none;
+  touch-action: none;
+}
+.paper.brushing #brush {
+  pointer-events: auto;
+  cursor: crosshair;
+}
+.side {
+  padding: 12px;
+  display: grid;
+  gap: 12px;
+}
+.side h3 {
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+}
+.pal {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 7px;
+}
+.sw {
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  border: 3px solid var(--ink);
+  max-width: 100%;
+}
+.sw.on {
+  outline: 4px solid var(--yellow);
+  outline-offset: 2px;
+  transform: scale(1.08);
+}
+.toolsRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+}
+.toolsRow .btn {
+  padding: 8px 4px;
+  font-size: .88rem;
+  flex-direction: column;
+  gap: 2px;
+}
+.toolsRow .btn b {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+.sizes {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.sizes button {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 3px solid var(--ink);
+  background: #fff;
+  display: grid;
+  place-items: center;
+}
+.sizes button i {
+  display: block;
+  border-radius: 50%;
+  background: var(--ink);
+}
+.sizes button.on {
+  background: var(--yellow);
+}
+.praise {
+  text-align: center;
+  font-weight: 900;
+  font-size: 1.1rem;
+  padding: 10px;
+  border-radius: 14px;
+  background: #F3F7FF;
+  color: var(--ink-soft);
+  min-height: 48px;
+}
+.praise.good {
+  background: var(--good);
+  color: var(--good-ink);
+  animation: pop .4s;
+}
+#printArea {
+  display: none;
+}
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printArea,
+  #printArea * {
+    visibility: visible;
+  }
+  #printArea {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+  }
+  #printArea h1 {
+    font-size: 28pt;
+    margin: 0 0 6mm;
+  }
+  #printArea svg {
+    width: 100%;
+    height: auto;
+    max-height: 240mm;
+  }
+}
+@media (max-width: 900px) {
+  .work {
+    grid-template-columns: 1fr;
+  }
+  .pal {
+    grid-template-columns: repeat(8, 1fr);
+  }
+}
+</style>
+<style id="pageSize">@page{size:A4 portrait;margin:12mm}</style>
+</head>
+<body>
+<div class="wrap"><div id="nojs" style="margin:10px auto;max-width:900px;background:#FFF1D9;color:#7A4500;border:3px solid #1F2A52;border-radius:14px;padding:12px 14px;font:700 16px/1.5 Arial,sans-serif">⚠️ Máy đang chỉ <b>xem trước</b> file nên trò chơi chưa chạy. Trên điện thoại hãy mở bằng <b>đường link (quét mã QR)</b> trong Safari hoặc Chrome, không mở file trong Zalo, Tệp hay Drive.</div><script>(function() {
+  var n = document.getElementById("nojs");
+  if (n) n.parentNode.removeChild(n);
+})();
+</script>
+  <header class="topbar sticker">
+    <div class="brand"><span id="logo"></span><div><h1>Bé Khéo Tay</h1><p>Vở tô màu · 10 chủ đề mầm non · 60 tranh</p></div></div>
+    <div class="tools"><button class="btn sm" id="voiceBtn"></button><a class="btn sm" href="index.html">🏠 Cầu Vồng Cảm Xúc</a></div>
+  </header>
+  <nav class="themes" id="themes" aria-label="Chủ đề"></nav>
+  <div class="thumbs" id="thumbs"></div>
+  <div class="work">
+    <section class="canvasBox sticker">
+      <div class="chead"><h2 id="picName"></h2><div class="meter">Đã tô <div class="bar"><i id="meterBar"></i></div><span id="meterTxt">0%</span></div></div>
+      <div class="scroller" id="scroller"><div class="paper" id="paper"><svg id="fillLayer" viewBox="0 0 400 400"></svg><canvas id="brush"></canvas><svg id="lineLayer" viewBox="0 0 400 400"></svg></div></div>
+    </section>
+    <aside class="side sticker">
+      <div><h3>Bút màu của bé</h3><div class="pal" id="pal"></div></div>
+      <div><h3>Dụng cụ</h3><div class="toolsRow">
+        <button class="btn on" id="tFill"><b>🎨</b>Đổ màu</button><button class="btn" id="tBrush"><b>🖌️</b>Cọ vẽ</button><button class="btn" id="tErase"><b>🧽</b>Tẩy</button>
+        <button class="btn" id="tUndo"><b>↩️</b>Quay lại</button><button class="btn" id="tClear"><b>🔄</b>Làm lại</button><button class="btn" id="tZoom"><b>🔍</b>Phóng to</button></div></div>
+      <div class="sizes" id="sizes"><span style="font-weight:900">Cỡ cọ</span><button data-s="8" aria-label="Nhỏ"><i style="width:8px;height:8px"></i></button><button class="on" data-s="18" aria-label="Vừa"><i style="width:14px;height:14px"></i></button><button data-s="34" aria-label="To"><i style="width:22px;height:22px"></i></button></div>
+      <button class="btn g" id="doneBtn">✅ Con tô xong rồi!</button>
+      <div class="praise" id="praise">Chọn màu con thích rồi chạm vào tranh nhé! Không có màu nào là sai.</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px"><button class="btn sm" id="printP">🖨️ In A4 dọc</button><button class="btn sm" id="printL">🖨️ In A4 ngang</button><button class="btn sm" id="printBlank" style="grid-column:span 2">📄 In tranh trắng để tô bằng bút sáp</button><button class="btn sm b" id="saveBtn" style="grid-column:span 2">💾 Tải tranh về máy</button></div>
+    </aside>
+  </div>
+  <p class="foot">Tranh tô màu do cô thiết kế bằng hình học, không dùng ảnh mạng · Dùng ở bước TẠO (khi không có vật liệu thật) và ở nhà cùng cha mẹ<br>Chạy trên Chrome, Edge, Safari · máy tính, máy tính bảng, điện thoại Android, iOS · Không đăng nhập, không quảng cáo, không thu dữ liệu của trẻ · Trường Mầm non Bất Bạt C</p>
+</div>
+<div id="printArea"></div>
+<script>const $ = (s) => document.querySelector(s), $$ = (s) => [...document.querySelectorAll(s)];
+const shuffle = (a) => {
+  a = [...a];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.random() * (i + 1) | 0;
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+};
+const pick = (a) => a[Math.random() * a.length | 0];
+const Store = {
+  get(k, d) {
+    try {
+      const v = localStorage.getItem("cvcx." + k);
+      return v == null ? d : JSON.parse(v);
+    } catch (e) {
+      return d;
+    }
+  },
+  set(k, v) {
+    try {
+      localStorage.setItem("cvcx." + k, JSON.stringify(v));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+};
+const Voice = {
+  on: Store.get("voice", true),
+  en: null,
+  vi: null,
+  init() {
+    if (!("speechSynthesis" in window)) return;
+    const f = this.pick = () => {
+      const v = speechSynthesis.getVoices();
+      this.en = v.find((x) => /en[-_]US/i.test(x.lang) && /female|zira|aria|jenny|samantha|google us/i.test(x.name)) || v.find((x) => /en[-_]US/i.test(x.lang)) || v.find((x) => /^en/i.test(x.lang)) || null;
+      this.vi = v.find((x) => /^vi/i.test(x.lang)) || null;
+    };
+    f();
+    try {
+      speechSynthesis.addEventListener("voiceschanged", f);
+    } catch (e) {
+      speechSynthesis.onvoiceschanged = f;
+    }
+  },
+  /* parts: [["Find red!","en"],["Bé tìm màu đỏ","vi"]] — câu tiếng Việt chỉ đọc khi máy có giọng tiếng Việt */
+  say(parts, rate) {
+    if (!this.on || !("speechSynthesis" in window)) return;
+    try {
+      if (typeof parts === "string") parts = [[parts, "en"]];
+      if (!this.en && !this.vi) this.pick && this.pick();
+      const go = () => parts.forEach(([t, l]) => {
+        if (l === "vi" && !this.vi) return;
+        const u = new SpeechSynthesisUtterance(t);
+        u.lang = l === "vi" ? "vi-VN" : "en-US";
+        const v = l === "vi" ? this.vi : this.en;
+        if (v) u.voice = v;
+        u.rate = rate || (l === "vi" ? 0.95 : 0.85);
+        u.pitch = 1.08;
+        speechSynthesis.speak(u);
+      });
+      if (speechSynthesis.speaking || speechSynthesis.pending) {
+        speechSynthesis.cancel();
+        setTimeout(go, 80);
+      } else go();
+    } catch (e) {
+    }
+  },
+  toggle() {
+    this.on = !this.on;
+    Store.set("voice", this.on);
+    if (!this.on && "speechSynthesis" in window) speechSynthesis.cancel();
+    return this.on;
+  }
+};
+Voice.init();
+const Sfx = {
+  ctx: null,
+  on: true,
+  ac() {
+    if (!this.ctx) {
+      const C = window.AudioContext || window.webkitAudioContext;
+      if (!C) return null;
+      this.ctx = new C();
+    }
+    if (this.ctx.state !== "running") {
+      try {
+        this.ctx.resume();
+      } catch (e) {
+      }
+    }
+    return this.ctx;
+  },
+  tone(f, t0, d, type = "sine", g = 0.12) {
+    const c = this.ac();
+    if (!c || !this.on) return;
+    const o = c.createOscillator(), a = c.createGain();
+    o.type = type;
+    o.frequency.value = f;
+    o.connect(a);
+    a.connect(c.destination);
+    const s = c.currentTime + t0;
+    a.gain.setValueAtTime(0, s);
+    a.gain.linearRampToValueAtTime(g, s + 0.02);
+    a.gain.exponentialRampToValueAtTime(1e-3, s + d);
+    o.start(s);
+    o.stop(s + d + 0.05);
+  },
+  good() {
+    [523, 659, 784, 1047].forEach((f, i) => this.tone(f, i * 0.09, 0.25, "triangle"));
+  },
+  bad() {
+    this.tone(330, 0, 0.18, "sine", 0.1);
+    this.tone(262, 0.16, 0.28, "sine", 0.1);
+  },
+  pop() {
+    this.tone(880, 0, 0.08, "square", 0.05);
+  },
+  win() {
+    [523, 659, 784, 659, 784, 1047].forEach((f, i) => this.tone(f, i * 0.12, 0.3, "triangle"));
+  }
+};
+function confetti(n = 70) {
+  const cols = ["#EF4A3C", "#FF8B2B", "#FFC928", "#2DB66B", "#2F7BEF", "#8A55E0", "#FF6FA8"];
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  for (let i = 0; i < n; i++) {
+    const e = document.createElement("i");
+    e.className = "confetti";
+    e.style.left = Math.random() * 100 + "vw";
+    e.style.background = cols[i % cols.length];
+    e.style.animationDelay = Math.random() * 0.5 + "s";
+    document.body.appendChild(e);
+    setTimeout(() => e.remove(), 2600);
+  }
+}
+function toast(msg, ms = 2200) {
+  let t = $("#toast");
+  if (!t) {
+    t = document.createElement("div");
+    t.id = "toast";
+    t.className = "toast";
+    t.setAttribute("role", "status");
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(t._h);
+  t._h = setTimeout(() => t.classList.remove("show"), ms);
+}
+function starsHTML(n, max = 5) {
+  let s = "";
+  for (let i = 0; i < max; i++) s += '<i class="'.concat(i < n ? "on" : "", '">⭐</i>');
+  return s;
+}
+const RAINBOW = '<svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-width="6"><path d="M8 46a24 24 0 0 1 48 0" stroke="#EF4A3C"/><path d="M15 46a17 17 0 0 1 34 0" stroke="#FFC928"/><path d="M22 46a10 10 0 0 1 20 0" stroke="#2DB66B"/></g><circle cx="12" cy="49" r="7" fill="#fff" stroke="#1F2A52" stroke-width="3"/><circle cx="52" cy="49" r="7" fill="#fff" stroke="#1F2A52" stroke-width="3"/></svg>';
+function inFrame() {
+  try {
+    return window.self !== window.top;
+  } catch (e) {
+    return true;
+  }
+}
+function bindVoiceBtn(btn) {
+  if (!btn) return;
+  const r = () => {
+    btn.innerHTML = Voice.on ? "🔊 Giọng đọc: bật" : "🔇 Giọng đọc: tắt";
+    btn.setAttribute("aria-pressed", Voice.on);
+  };
+  r();
+  btn.onclick = () => {
+    Voice.toggle();
+    r();
+  };
+}
+const Music = {
+  iv: null,
+  step: 0,
+  emo: null,
+  vol: 0.09,
+  P: {
+    happy: { bpm: 124, root: 60, sc: [0, 2, 4, 7, 9, 12, 14, 16], w: "triangle", pat: [0, 2, 4, 2, 5, 4, 2, 7], prog: [0, 5, 7, 5], bass: 1 },
+    sad: { bpm: 64, root: 57, sc: [0, 2, 3, 5, 7, 8, 10, 12], w: "sine", pat: [4, 3, 2, 0, 2, 3, 1, 0], prog: [0, -4, -2, -5], bass: 1 },
+    calm: { bpm: 70, root: 60, sc: [0, 2, 4, 7, 9, 12, 14, 16], w: "sine", pat: [0, 4, 2, 5, 3, 6, 4, 2], prog: [0, -3, 5, 0], bass: 1, soft: 1 },
+    excited: { bpm: 150, root: 62, sc: [0, 2, 4, 5, 7, 9, 11, 12], w: "square", pat: [0, 4, 7, 4, 5, 7, 4, 2], prog: [0, 5, 7, 0], bass: 1, drum: 1 },
+    surprised: { bpm: 108, root: 64, sc: [0, 2, 4, 6, 7, 9, 11, 12], w: "triangle", pat: [0, 7, 1, 6, 2, 5, 7, 0], prog: [0, 2, 0, -2], bass: 0 },
+    angry: { bpm: 96, root: 50, sc: [0, 1, 3, 5, 6, 8, 10, 12], w: "sawtooth", pat: [0, 0, 3, 0, 1, 0, 3, 4], prog: [0, 1, 0, -2], bass: 1, drum: 1 }
+  },
+  hz: (m) => 440 * Math.pow(2, (m - 69) / 12),
+  FILES: { happy: "nhac/nhac-vui.mp3", sad: "nhac/nhac-buon.mp3", calm: "nhac/nhac-binh-yen.mp3", excited: "nhac/nhac-hao-huc.mp3" },
+  au: null,
+  play(emo) {
+    this.stop();
+    const f = this.FILES[emo];
+    if (f) {
+      this.emo = emo;
+      const a = this.au = new Audio(f);
+      a.loop = true;
+      a.volume = 0;
+      a.play().then(() => {
+        let v = 0;
+        const iv = setInterval(() => {
+          v = Math.min(0.9, v + 0.08);
+          if (this.au === a) a.volume = v;
+          if (v >= 0.9) clearInterval(iv);
+        }, 80);
+      }).catch(() => {
+        if (this.au === a) {
+          this.au = null;
+          this.synth(emo);
+        }
+      });
+      return;
+    }
+    this.synth(emo);
+  },
+  synth(emo) {
+    this.stop();
+    const p = this.P[emo];
+    if (!p) return;
+    this.emo = emo;
+    this.step = 0;
+    const c = Sfx.ac();
+    if (!c) return;
+    const dt = 60 / p.bpm / 2;
+    const tick = () => {
+      const s = this.step++, ch = p.prog[Math.floor(s / 8) % p.prog.length], n = p.root + ch + p.sc[p.pat[s % 8]];
+      const was = Sfx.on;
+      Sfx.on = true;
+      Sfx.tone(this.hz(n + (s % 16 >= 8 && !p.soft ? 12 : 0)), 0, dt * (p.soft ? 3 : 1.6), p.w, this.vol * (p.w === "sawtooth" || p.w === "square" ? 0.45 : 1));
+      if (p.bass && s % 4 === 0) Sfx.tone(this.hz(p.root + ch - 12), 0, dt * (p.soft ? 6 : 3), "sine", this.vol * 1.1);
+      if (p.drum && s % 2 === 0) Sfx.tone(s % 4 === 0 ? 70 : 180, 0, 0.09, "square", this.vol * 0.5);
+      Sfx.on = was;
+    };
+    tick();
+    this.iv = setInterval(tick, dt * 1e3);
+  },
+  stop() {
+    clearInterval(this.iv);
+    this.iv = null;
+    if (this.au) {
+      try {
+        this.au.pause();
+      } catch (e) {
+      }
+      this.au = null;
+    }
+    this.emo = null;
+  }
+};
+const EMO = {
+  happy: { vi: "Vui", en: "Happy", col: "#FFC928", pal: ["#FFC928", "#FF8B2B", "#FF6FA8", "#FFE27A"] },
+  sad: { vi: "Buồn", en: "Sad", col: "#6FA8FF", pal: ["#2F7BEF", "#6FA8FF", "#9DB8E8", "#5466B8"] },
+  calm: { vi: "Bình yên", en: "Calm", col: "#5FD394", pal: ["#2DB66B", "#7BE0B0", "#4FC3C9", "#B6E8A5"] },
+  excited: { vi: "Háo hức", en: "Excited", col: "#FF7EB0", pal: ["#FF6FA8", "#FF8B2B", "#EF4A3C", "#FFC928"] },
+  surprised: { vi: "Ngạc nhiên", en: "Surprised", col: "#B48CFF", pal: ["#8A55E0", "#B48CFF", "#2F7BEF", "#FF6FA8"] },
+  angry: { vi: "Tức giận", en: "Angry", col: "#FF7A6B", pal: ["#EF4A3C", "#B5301F", "#FF8B2B", "#6E2A2A"] }
+};
+function faceSVG(e, label) {
+  const c = EMO[e].col, k = "#1F2A52", L = label ? ' aria-label="'.concat(EMO[e].en, " – ").concat(EMO[e].vi, '"') : ' aria-hidden="true"';
+  const eyes = {
+    happy: '<circle cx="38" cy="44" r="5"/><circle cx="62" cy="44" r="5"/>',
+    sad: '<circle cx="38" cy="46" r="5"/><circle cx="62" cy="46" r="5"/>',
+    calm: '<path d="M31 45q7 7 14 0M55 45q7 7 14 0" fill="none" stroke="#1F2A52" stroke-width="4" stroke-linecap="round"/>',
+    excited: '<path d="M38 36l3 7 7 1-5 5 1 7-6-4-6 4 1-7-5-5 7-1z M62 36l3 7 7 1-5 5 1 7-6-4-6 4 1-7-5-5 7-1z"/>',
+    surprised: '<circle cx="38" cy="44" r="7" fill="#fff" stroke="#1F2A52" stroke-width="3"/><circle cx="38" cy="44" r="3"/><circle cx="62" cy="44" r="7" fill="#fff" stroke="#1F2A52" stroke-width="3"/><circle cx="62" cy="44" r="3"/>',
+    angry: '<circle cx="38" cy="47" r="5"/><circle cx="62" cy="47" r="5"/>'
+  }[e];
+  const brow = { sad: '<path d="M30 36l12-5M70 36l-12-5"/>', surprised: '<path d="M30 30q8-6 15 0M55 30q8-6 15 0"/>', angry: '<path d="M29 33l14 6M71 33l-14 6"/>' }[e] || "";
+  const mouth = {
+    happy: '<path d="M32 60q18 18 36 0" fill="none"/>',
+    sad: '<path d="M35 70q15-12 30 0" fill="none"/>',
+    calm: '<path d="M38 63q12 8 24 0" fill="none"/>',
+    excited: '<path d="M31 58h38q-2 20-19 20t-19-20z" fill="#fff"/>',
+    surprised: '<ellipse cx="50" cy="67" rx="8" ry="10" fill="#fff"/>',
+    angry: '<path d="M36 68q14-6 28 0" fill="none"/>'
+  }[e];
+  const extra = e === "sad" ? '<path d="M64 52q4 8 0 11q-4-3 0-11z" fill="#9FD3FF" stroke="#1F2A52" stroke-width="2"/>' : e === "happy" || e === "excited" ? '<circle cx="28" cy="58" r="5" fill="#FF8DBA" opacity=".7"/><circle cx="72" cy="58" r="5" fill="#FF8DBA" opacity=".7"/>' : "";
+  return '<svg viewBox="0 0 100 100" role="img"'.concat(L, '><circle cx="50" cy="52" r="42" fill="').concat(c, '" stroke="').concat(k, '" stroke-width="4"/><g fill="').concat(k, '">').concat(eyes, '</g><g stroke="').concat(k, '" stroke-width="4" stroke-linecap="round" fill="none">').concat(brow, '</g><g stroke="').concat(k, '" stroke-width="4" stroke-linecap="round">').concat(mouth, "</g>").concat(extra, "</svg>");
+}
+(function() {
+  if (!window.PointerEvent) {
+    const M = { touchstart: "onpointerdown", touchmove: "onpointermove", touchend: "onpointerup", touchcancel: "onpointercancel" };
+    if (!Element.prototype.setPointerCapture) Element.prototype.setPointerCapture = function() {
+    };
+    let cur = null;
+    Object.keys(M).forEach((tp) => document.addEventListener(tp, (e) => {
+      const t = e.changedTouches[0];
+      if (!t) return;
+      let el = tp === "touchstart" ? e.target : cur;
+      if (tp === "touchstart") {
+        while (el && !el.onpointerdown) el = el.parentElement;
+        cur = el;
+      }
+      if (!el || !el[M[tp]]) return;
+      el[M[tp]]({ clientX: t.clientX, clientY: t.clientY, pointerId: 1, pointerType: "touch", target: e.target, preventDefault() {
+      } });
+      if (el.tagName === "CANVAS") e.preventDefault();
+      if (tp === "touchend" || tp === "touchcancel") cur = null;
+    }, { passive: false }));
+  }
+  const noAR = !(window.CSS && CSS.supports && CSS.supports("aspect-ratio", "1/1"));
+  const noGap = !(window.CSS && CSS.supports && CSS.supports("inset", "0"));
+  if (noGap) document.documentElement.classList.add("nogap");
+  if (noAR) {
+    const AR = [["#danceWrap", 16 / 10], [".scene", 4 / 3], [".blob", 1], [".stageWrap", 4 / 3], [".card img", 4 / 3], [".paper", 1], [".sw", 1], [".stage", 1]];
+    let q = 0;
+    const fix = () => {
+      q = 0;
+      AR.forEach(([s, r]) => document.querySelectorAll(s).forEach((el) => {
+        const w = el.getBoundingClientRect().width;
+        if (w) el.style.height = w / r + "px";
+      }));
+    };
+    const later = () => {
+      if (!q) q = requestAnimationFrame(fix);
+    };
+    window.addEventListener("resize", later);
+    window.addEventListener("load", later);
+    try {
+      new MutationObserver(later).observe(document.body, { childList: true, subtree: true });
+    } catch (e) {
+    }
+    later();
+  }
+  let unlocked = false;
+  function silentWav() {
+    const n = 800, b = new ArrayBuffer(44 + n), v = new DataView(b);
+    const w = (o, s2) => {
+      for (let i = 0; i < s2.length; i++) v.setUint8(o + i, s2.charCodeAt(i));
+    };
+    w(0, "RIFF");
+    v.setUint32(4, 36 + n, true);
+    w(8, "WAVE");
+    w(12, "fmt ");
+    v.setUint32(16, 16, true);
+    v.setUint16(20, 1, true);
+    v.setUint16(22, 1, true);
+    v.setUint32(24, 8e3, true);
+    v.setUint32(28, 8e3, true);
+    v.setUint16(32, 1, true);
+    v.setUint16(34, 8, true);
+    w(36, "data");
+    v.setUint32(40, n, true);
+    for (let i = 0; i < n; i++) v.setUint8(44 + i, 128);
+    let s = "";
+    new Uint8Array(b).forEach((x) => s += String.fromCharCode(x));
+    return "data:audio/wav;base64," + btoa(s);
+  }
+  window.unlockAudio = function() {
+    if (unlocked) return;
+    unlocked = true;
+    try {
+      if (navigator.audioSession) navigator.audioSession.type = "playback";
+    } catch (e) {
+    }
+    try {
+      const a = new Audio(silentWav());
+      a.setAttribute("playsinline", "");
+      const p = a.play();
+      if (p && p.catch) p.catch(() => {
+      });
+    } catch (e) {
+    }
+    try {
+      const c = Sfx.ac();
+      if (c) {
+        const s = c.createBufferSource();
+        s.buffer = c.createBuffer(1, 1, 22050);
+        s.connect(c.destination);
+        s.start(0);
+      }
+    } catch (e) {
+    }
+    try {
+      if ("speechSynthesis" in window) {
+        const u = new SpeechSynthesisUtterance(" ");
+        u.volume = 0;
+        speechSynthesis.speak(u);
+        Voice.pick && Voice.pick();
+      }
+    } catch (e) {
+    }
+  };
+  ["touchend", "pointerup", "click", "keydown"].forEach((t) => document.addEventListener(t, window.unlockAudio, { capture: true, passive: true }));
+  const touch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+  if (touch && !/index\.html$|\/$/.test(location.pathname.replace(/\?.*$/, "")) && !document.getElementById("startGate") && !window.NO_GATE) {
+    const g = document.createElement("div");
+    g.id = "startGate";
+    g.setAttribute("role", "dialog");
+    g.innerHTML = '<button type="button" id="startBtn"><span class="sg-bow">' + RAINBOW + "</span><b>Chạm để bắt đầu</b><small>Tap to start</small></button><p>🔔 iPhone: gạt nút bên hông sang <b>bật chuông</b> và tăng âm lượng để nghe Bạn Màu đọc.</p>";
+    document.body.appendChild(g);
+    document.getElementById("startBtn").addEventListener("click", () => {
+      window.unlockAudio();
+      g.remove();
+      setTimeout(() => {
+        try {
+          window.APP_START && window.APP_START();
+        } catch (e) {
+        }
+      }, 120);
+    });
+  }
+})();
+(function() {
+  if (!window.__EMBED) return;
+  document.addEventListener("click", function(e) {
+    var a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+    if (!a) return;
+    var h = a.getAttribute("href") || "";
+    if (/^(https?:|mailto:|tel:|#)/.test(h)) return;
+    e.preventDefault();
+    try {
+      parent.postMessage({ cvcx: "go", href: h }, "*");
+    } catch (x) {
+    }
+  }, true);
+})();
+const _c = (x, y, r) => '<circle cx="'.concat(x, '" cy="').concat(y, '" r="').concat(r, '"/>'), _e = (x, y, rx, ry, a = 0) => '<ellipse cx="'.concat(x, '" cy="').concat(y, '" rx="').concat(rx, '" ry="').concat(ry, '"').concat(a ? ' transform="rotate('.concat(a, " ").concat(x, " ").concat(y, ')"') : "", "/>"), _r = (x, y, w, h, rx = 0) => '<rect x="'.concat(x, '" y="').concat(y, '" width="').concat(w, '" height="').concat(h, '" rx="').concat(rx, '"/>'), _p = (d) => '<path d="'.concat(d, '"/>'), _g = (pt) => '<polygon points="'.concat(pt, '"/>');
+const _S = (cx, cy, r) => {
+  let s = [];
+  for (let i = 0; i < 10; i++) {
+    const a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r * 0.45 : r;
+    s.push((cx + Math.cos(a) * rr).toFixed(1) + "," + (cy + Math.sin(a) * rr).toFixed(1));
+  }
+  return _g(s.join(" "));
+};
+const _H = (x, y, s) => _p("M".concat(x, " ").concat(y + s, " Q").concat(x - 1.5 * s, " ").concat(y + 0.1 * s, " ").concat(x - 1.3 * s, " ").concat(y - 0.6 * s, " Q").concat(x - 1.1 * s, " ").concat(y - 1.25 * s, " ").concat(x - 0.5 * s, " ").concat(y - 1.2 * s, " Q").concat(x - 0.1 * s, " ").concat(y - 1.15 * s, " ").concat(x, " ").concat(y - 0.6 * s, " Q").concat(x + 0.1 * s, " ").concat(y - 1.15 * s, " ").concat(x + 0.5 * s, " ").concat(y - 1.2 * s, " Q").concat(x + 1.1 * s, " ").concat(y - 1.25 * s, " ").concat(x + 1.3 * s, " ").concat(y - 0.6 * s, " Q").concat(x + 1.5 * s, " ").concat(y + 0.1 * s, " ").concat(x, " ").concat(y + s, "Z"));
+const _T = (x, y, s) => _p("M".concat(x, " ").concat(y, " Q").concat(x - s, " ").concat(y + 1.6 * s, " ").concat(x, " ").concat(y + 2 * s, " Q").concat(x + s, " ").concat(y + 1.6 * s, " ").concat(x, " ").concat(y, "Z"));
+const _CL = (x, y, s) => _p("M".concat(x - s, " ").concat(y, " Q").concat(x - 1.15 * s, " ").concat(y - 0.55 * s, " ").concat(x - 0.55 * s, " ").concat(y - 0.6 * s, " Q").concat(x - 0.45 * s, " ").concat(y - 1.2 * s, " ").concat(x + 0.1 * s, " ").concat(y - 1.05 * s, " Q").concat(x + 0.5 * s, " ").concat(y - 1.35 * s, " ").concat(x + 0.75 * s, " ").concat(y - 0.75 * s, " Q").concat(x + 1.2 * s, " ").concat(y - 0.6 * s, " ").concat(x + s, " ").concat(y, "Z"));
+const _RAYS = (cx, cy, r1, r2, n) => {
+  let o = [];
+  for (let i = 0; i < n; i++) {
+    const a = i * 2 * Math.PI / n, b = 0.16;
+    o.push(_g([[a - b, r1], [a, r2], [a + b, r1]].map(([t, r]) => (cx + Math.cos(t) * r).toFixed(1) + "," + (cy + Math.sin(t) * r).toFixed(1)).join(" ")));
+  }
+  return o;
+};
+const _PET = (cx, cy, d, r, n) => {
+  let o = [];
+  for (let i = 0; i < n; i++) {
+    const a = i * 2 * Math.PI / n;
+    o.push(_c((cx + Math.cos(a) * d).toFixed(1), (cy + Math.sin(a) * d).toFixed(1), r));
+  }
+  return o;
+};
+const _ARC = (cx, cy, r1, r2) => _p("M".concat(cx - r2, " ").concat(cy, " A").concat(r2, " ").concat(r2, " 0 0 1 ").concat(cx + r2, " ").concat(cy, " L").concat(cx + r1, " ").concat(cy, " A").concat(r1, " ").concat(r1, " 0 0 0 ").concat(cx - r1, " ").concat(cy, "Z"));
+const DRAW = [
+  { vi: "Bản thân", en: "Myself", ic: "🧒", pics: [
+    { vi: "Khuôn mặt bé", en: "my face", F: [_p("M75 205 Q65 70 200 62 Q335 70 325 205 Q330 255 300 275 L100 275 Q70 255 75 205Z"), _c(80, 218, 28), _c(320, 218, 28), _c(200, 215, 118), _p("M92 175 Q115 95 200 90 Q285 95 308 175 Q262 140 232 152 Q200 118 160 152 Q128 136 92 175Z"), _c(138, 255, 17), _c(262, 255, 17), _p("M118 322 Q200 352 282 322 L338 398 L62 398Z")], D: [_p("M160 272 Q200 306 240 272"), _p("M200 222 Q188 245 206 248")], K: [_e(156, 212, 11, 14), _e(244, 212, 11, 14)] },
+    { vi: "Bàn tay", en: "hand", F: [_r(126, 92, 38, 130, 19), _r(171, 62, 38, 150, 19), _r(216, 72, 38, 140, 19), _r(261, 108, 36, 120, 18), _p("M132 252 Q82 232 62 182 Q57 160 77 156 Q97 153 112 177 L152 232Z"), _r(120, 190, 182, 170, 42), _r(132, 342, 158, 52, 10), _H(212, 285, 22)] },
+    { vi: "Áo phông", en: "T-shirt", F: [_p("M140 70 L100 86 L40 150 L85 196 L120 166 L120 352 L280 352 L280 166 L315 196 L360 150 L300 86 L260 70 Q200 112 140 70Z"), _p("M146 72 Q200 124 254 72 Q200 98 146 72Z"), _r(222, 190, 48, 52, 8), _S(168, 248, 36)], D: [_p("M56 166 L100 210 M344 166 L300 210")] },
+    { vi: "Đôi giày", en: "shoes", F: [_p("M190 200 L190 110 Q190 90 210 90 L260 90 Q270 140 320 155 Q372 165 376 200Z"), _r(184, 198, 198, 26, 12), _p("M40 262 L40 172 Q40 152 60 152 L110 152 Q120 202 170 217 Q222 227 226 262Z"), _r(34, 260, 198, 26, 12)], D: [_p("M120 182 L150 172 M128 200 L158 190 M270 120 L300 110 M278 138 L308 128")] },
+    { vi: "Cốc và bàn chải", en: "cup and toothbrush", F: [_r(230, 42, 26, 200, 13), _r(220, 26, 46, 44, 8), _p("M290 212 Q350 212 345 272 Q340 322 278 322 L280 296 Q320 296 320 266 Q322 236 288 236Z"), _p("M110 182 L290 182 L270 370 Q268 386 250 386 L150 386 Q132 386 130 370Z"), _p("M117 242 L283 242 L279 282 L121 282Z"), _c(96, 120, 18), _c(66, 78, 12), _c(132, 70, 10)], D: [_p("M230 50 V62 M243 50 V62 M256 50 V62")] },
+    { vi: "Quả bóng", en: "ball", F: [_e(200, 382, 110, 13), _c(200, 210, 150), _p("M200 60 A150 150 0 0 0 200 360 Q105 210 200 60Z"), _p("M200 60 A150 150 0 0 1 200 360 Q295 210 200 60Z"), _c(200, 210, 24)] }
+  ] },
+  { vi: "Gia đình", en: "My family", ic: "🏠", pics: [
+    { vi: "Ngôi nhà", en: "house", F: [_c(62, 62, 34), _r(256, 72, 40, 90), _g("58,192 200,70 342,192"), _r(85, 186, 230, 190), _r(170, 266, 60, 110, 8), _r(105, 216, 52, 46, 4), _r(243, 216, 52, 46, 4), _r(18, 374, 364, 22, 8)], D: [_p("M131 216 V262 M105 239 H157 M269 216 V262 M243 239 H295")], K: [_c(218, 322, 5)] },
+    { vi: "Cái ô", en: "umbrella", F: [_p("M192 205 L192 330 Q192 368 160 368 Q128 368 128 336 L144 336 Q144 352 160 352 Q176 352 176 330 L176 205Z"), _p("M40 210 Q60 70 200 60 Q340 70 360 210 Q330 185 300 210 Q270 185 240 210 Q220 185 200 210 Q180 185 160 210 Q130 185 100 210 Q70 185 40 210Z"), _p("M200 60 Q160 130 160 210 Q180 185 200 210 Q220 185 240 210 Q240 130 200 60Z"), _T(300, 250, 14), _T(340, 300, 12), _T(70, 260, 12)] },
+    { vi: "Ấm trà", en: "teapot", F: [_p("M75 212 Q20 232 40 292 Q55 327 90 317 L95 297 Q65 302 58 282 Q48 247 82 237Z"), _p("M300 242 Q340 232 365 177 L381 187 Q362 272 305 292Z"), _e(190, 262, 120, 100), _p("M128 178 Q190 128 252 178Z"), _c(190, 140, 16), ..._PET(190, 264, 32, 15, 5), _c(190, 264, 16)] },
+    { vi: "Ghế sofa", en: "sofa", F: [_r(80, 118, 240, 140, 32), _r(40, 170, 72, 172, 26), _r(288, 170, 72, 172, 26), _r(122, 148, 70, 62, 20), _r(208, 148, 70, 62, 20), _r(98, 232, 204, 70, 16), _r(80, 292, 240, 60, 10), _r(86, 350, 22, 32, 4), _r(292, 350, 22, 32, 4)] },
+    { vi: "Bánh sinh nhật", en: "birthday cake", F: [_e(200, 372, 166, 22), _r(70, 250, 260, 116, 14), _p("M70 270 Q70 250 90 250 L310 250 Q330 250 330 270 Q310 292 290 270 Q270 296 250 270 Q230 292 210 270 Q190 296 170 270 Q150 292 130 270 Q110 296 90 276 Q78 292 70 270Z"), _r(115, 170, 170, 82, 12), _r(150, 112, 16, 60, 4), _r(192, 100, 16, 72, 4), _r(234, 112, 16, 60, 4), _T(158, 80, 11), _T(200, 68, 11), _T(242, 80, 11), _c(160, 212, 10), _c(200, 206, 10), _c(240, 212, 10)] },
+    { vi: "Trái tim yêu thương", en: "love heart", F: [_p("M200 362 Q58 272 60 170 Q62 90 136 90 Q180 90 200 136 Q220 90 264 90 Q338 90 340 170 Q342 272 200 362Z"), _H(150, 210, 32), _H(250, 210, 32), _H(200, 290, 26)] }
+  ] },
+  { vi: "Trường mầm non", en: "My school", ic: "🏫", pics: [
+    { vi: "Trường mầm non", en: "school", F: [_r(196, 30, 8, 72), _p("M204 32 L272 46 L204 62Z"), _g("48,188 200,96 352,188"), _r(70, 182, 260, 190), _c(200, 150, 24), _p("M168 372 L168 302 Q200 268 232 302 L232 372Z"), _r(92, 208, 56, 50, 6), _r(252, 208, 56, 50, 6), _r(92, 294, 56, 50, 6), _r(252, 294, 56, 50, 6)], D: [_p("M200 150 V134 M200 150 H213")] },
+    { vi: "Cặp sách", en: "backpack", F: [_p("M150 97 Q150 45 200 45 Q250 45 250 97 L232 97 Q232 63 200 63 Q168 63 168 97Z"), _r(98, 90, 204, 272, 52), _p("M98 142 Q98 90 150 90 L250 90 Q302 90 302 142 L302 192 Q200 228 98 192Z"), _r(138, 252, 124, 84, 18), _r(185, 196, 30, 28, 6)] },
+    { vi: "Bút chì", en: "pencil", F: [_g("110,330 300,140 340,180 150,370"), _g("110,330 150,370 70,390"), _g("70,390 82,360 100,378"), _g("300,140 340,180 352,168 312,128"), _g("312,128 352,168 374,146 334,106")], D: [_p("M124 344 L318 158")] },
+    { vi: "Cầu trượt", en: "slide", F: [_c(332, 70, 34), _r(70, 118, 18, 262, 6), _r(140, 118, 18, 262, 6), _r(88, 160, 52, 14), _r(88, 220, 52, 14), _r(88, 280, 52, 14), _r(88, 340, 52, 14), _r(58, 108, 124, 22, 6), _p("M175 112 L210 112 Q262 112 300 250 Q330 348 380 358 L380 384 Q308 384 278 280 Q244 152 175 140Z"), _r(18, 378, 364, 18, 6)] },
+    { vi: "Quyển sách", en: "book", F: [_p("M200 110 Q130 80 50 100 L50 320 Q130 300 200 330Z"), _p("M200 110 Q270 80 350 100 L350 320 Q270 300 200 330Z"), _c(112, 248, 30), _c(286, 248, 30), _g("252,318 252,372 267,360 282,372 282,320")], D: [_p("M74 140 Q125 128 180 146 M74 180 Q125 168 180 186 M220 146 Q275 128 326 140 M220 186 Q275 168 326 180")] },
+    { vi: "Bảng màu", en: "paint palette", F: [_p("M200 70 Q332 70 350 190 Q362 272 290 292 Q250 302 260 335 Q270 372 220 372 Q88 372 60 250 Q40 110 200 70Z"), _c(130, 152, 26), _c(200, 120, 26), _c(274, 146, 26), _c(302, 214, 24), _c(116, 240, 26), _g("124,334 298,192 312,206 138,348"), _p("M298 192 Q330 158 352 164 Q348 192 312 206Z")] }
+  ] },
+  { vi: "Nghề nghiệp", en: "Jobs", ic: "👨‍🍳", pics: [
+    { vi: "Mũ đầu bếp", en: "chef hat", F: [_p("M110 232 Q48 212 70 150 Q86 100 140 116 Q160 60 210 70 Q260 60 276 116 Q332 100 336 156 Q346 216 290 232Z"), _r(110, 226, 180, 92, 10), _r(322, 250, 14, 128, 7), _e(329, 236, 22, 30)], D: [_p("M152 230 Q146 182 160 150 M248 230 Q254 182 240 150")] },
+    { vi: "Hộp cứu thương", en: "first aid kit", F: [_p("M155 112 L155 82 Q155 66 170 66 L230 66 Q245 66 245 82 L245 112 L228 112 L228 84 L172 84 L172 112Z"), _r(58, 106, 284, 232, 24), _p("M174 158 H226 V198 H266 V250 H226 V290 H174 V250 H134 V198 H174Z")] },
+    { vi: "Mũ bảo hộ", en: "hard hat", F: [_p("M80 272 Q80 110 200 104 Q320 110 320 272Z"), _p("M184 106 Q200 99 216 106 L216 272 L184 272Z"), _r(44, 262, 312, 42, 21), _S(126, 206, 30), _S(272, 206, 30)] },
+    { vi: "Bình tưới cây", en: "watering can", F: [_p("M150 172 Q150 90 230 90 Q300 95 290 172 L270 172 Q270 112 230 112 Q172 112 172 172Z"), _g("288,222 360,142 374,156 300,262"), _c(370, 142, 20), _r(108, 168, 184, 174, 26), ..._PET(200, 256, 26, 15, 5), _c(200, 256, 14), _T(356, 180, 8), _T(340, 206, 8), _T(372, 214, 8)] },
+    { vi: "Giá vẽ", en: "easel", F: [_g("122,392 190,80 206,80 142,392"), _g("278,392 210,80 194,80 258,392"), _r(98, 108, 204, 164, 6), _r(108, 270, 184, 18, 4), _c(150, 158, 22), _p("M104 266 Q168 190 238 266Z"), _r(222, 206, 48, 44), _g("214,206 246,178 278,206")] },
+    { vi: "Phong bì thư", en: "letter", F: [_r(58, 120, 284, 192, 14), _g("62,124 200,232 338,124"), _r(268, 140, 52, 56, 4), _H(200, 236, 22)], D: [_p("M62 306 L172 212 M338 306 L228 212")] }
+  ] },
+  { vi: "Thực vật", en: "Plants", ic: "🌳", pics: [
+    { vi: "Cái cây", en: "tree", F: [_p("M180 380 L186 250 Q160 230 140 240 L150 225 Q176 220 190 236 L195 200 L210 200 L212 240 Q236 216 260 226 L265 240 Q236 236 219 256 L222 380Z"), _c(120, 192, 60), _c(280, 192, 60), _c(200, 150, 92), _c(160, 140, 14), _c(242, 165, 14), _c(200, 205, 14), _c(118, 205, 12), _c(286, 208, 12), _r(38, 374, 324, 20, 8)] },
+    { vi: "Bông hoa", en: "flower", F: [_r(192, 200, 16, 182, 8), _p("M196 302 Q130 250 110 292 Q140 332 196 316Z"), _p("M204 272 Q270 220 290 262 Q260 302 204 288Z"), ..._PET(200, 150, 62, 42, 6), _c(200, 150, 40), _r(30, 374, 340, 20, 8)] },
+    { vi: "Quả táo", en: "apple", F: [_p("M195 126 Q190 80 205 55 L215 60 Q202 85 208 126Z"), _p("M210 76 Q260 40 300 60 Q265 100 210 76Z"), _p("M200 120 Q260 80 310 130 Q350 190 320 280 Q290 360 240 350 Q215 345 200 355 Q185 345 160 350 Q110 360 80 280 Q50 190 90 130 Q140 80 200 120Z"), _e(128, 180, 14, 30, 20)] },
+    { vi: "Chậu cây", en: "potted plant", F: [_p("M200 246 Q130 200 120 120 Q190 140 200 246Z"), _p("M200 246 Q270 200 290 120 Q215 140 200 246Z"), _p("M200 246 Q168 150 200 60 Q232 150 200 246Z"), _p("M120 262 L280 262 L260 382 L140 382Z"), _r(104, 240, 192, 36, 8), _c(200, 322, 18)] },
+    { vi: "Cây nấm", en: "mushroom", F: [_p("M160 230 Q150 330 140 370 L260 370 Q250 330 240 230Z"), _p("M50 242 Q60 90 200 80 Q340 90 350 242 Q200 272 50 242Z"), _c(130, 172, 22), _c(210, 136, 26), _c(282, 182, 20), _c(186, 206, 16), _r(38, 364, 324, 22, 8)] },
+    { vi: "Củ cà rốt", en: "carrot", F: [_p("M210 142 Q200 60 240 40 Q246 100 226 152Z"), _p("M230 156 Q280 80 330 90 Q300 140 240 170Z"), _p("M190 142 Q150 70 170 40 Q206 90 206 142Z"), _p("M120 150 Q200 120 250 170 Q270 200 180 330 Q140 390 110 360 Q90 340 100 250 Q105 180 120 150Z")], D: [_p("M130 220 L160 214 M120 270 L150 268 M134 320 L154 316")] }
+  ] },
+  { vi: "Động vật", en: "Animals", ic: "🐶", pics: [
+    { vi: "Con cá", en: "fish", F: [_p("M100 200 L30 130 Q52 200 30 270Z"), _p("M170 118 Q220 58 272 122Z"), _p("M190 284 Q216 332 252 282Z"), _e(210, 200, 130, 90), _p("M178 113 Q148 200 178 287 Q206 200 206 113Z"), _c(280, 180, 18), _c(350, 110, 14), _c(370, 68, 10)], D: [_p("M300 226 Q314 232 326 222")], K: [_c(284, 180, 7)] },
+    { vi: "Con mèo", en: "cat", F: [_g("90,172 100,60 176,122"), _g("310,172 300,60 224,122"), _g("108,150 112,92 154,126"), _g("292,150 288,92 246,126"), _e(200, 222, 136, 120), _e(200, 262, 50, 35), _g("187,242 213,242 200,257")], D: [_p("M150 262 L68 246 M150 274 L70 282 M250 262 L332 246 M250 274 L330 282 M200 257 V276")], K: [_e(150, 206, 12, 18), _e(250, 206, 12, 18)] },
+    { vi: "Gà con", en: "chick", F: [_p("M195 76 Q185 50 200 44 Q206 60 211 76Z"), _c(200, 145, 72), _e(200, 256, 120, 104), _p("M100 252 Q58 232 70 292 Q100 302 122 282Z"), _p("M300 252 Q342 232 330 292 Q300 302 278 282Z"), _g("185,152 215,152 200,174"), _p("M88 300 L118 280 L148 305 L178 280 L208 305 L238 280 L268 305 L298 280 L314 300 Q300 382 200 386 Q100 382 88 300Z")], K: [_c(178, 132, 8), _c(222, 132, 8)] },
+    { vi: "Ốc sên", en: "snail", F: [_p("M60 332 Q40 242 90 232 Q116 232 120 272 Q130 322 330 322 Q366 324 360 342 Q350 362 300 362 L90 362 Q64 357 60 332Z"), _c(212, 210, 110)], D: [_p("M212 215 Q232 215 232 195 Q230 170 207 170 Q177 172 174 205 Q174 245 212 248 Q257 248 260 200 Q257 140 202 135 Q142 140 137 205"), _p("M80 236 L60 172 M100 233 L106 166")], K: [_c(60, 170, 8), _c(106, 164, 8), _c(86, 262, 6)] },
+    { vi: "Con bướm", en: "butterfly", F: [_p("M195 190 Q120 60 60 100 Q30 170 120 210 Q160 216 195 200Z"), _p("M205 190 Q280 60 340 100 Q370 170 280 210 Q240 216 205 200Z"), _p("M195 212 Q110 222 100 292 Q130 342 195 242Z"), _p("M205 212 Q290 222 300 292 Q270 342 205 242Z"), _c(110, 142, 20), _c(290, 142, 20), _c(142, 282, 14), _c(258, 282, 14), _e(200, 216, 14, 82), _c(200, 126, 18)], D: [_p("M195 112 Q180 70 160 58 M205 112 Q220 70 240 58")] },
+    { vi: "Con rùa", en: "turtle", F: [_e(116, 300, 30, 22), _e(284, 300, 30, 22), _e(132, 192, 28, 20, -20), _e(270, 192, 28, 20, 20), _c(342, 240, 36), _g("76,268 46,262 74,252"), _p("M80 282 Q80 140 200 130 Q320 140 320 282Z"), _g("200,165 235,185 235,225 200,245 165,225 165,185"), _g("104,252 124,192 160,202 160,240 140,266"), _g("296,252 276,192 240,202 240,240 260,266"), _r(70, 268, 260, 26, 13)], K: [_c(354, 232, 6)] }
+  ] },
+  { vi: "Giao thông", en: "Transport", ic: "🚗", pics: [
+    { vi: "Ô tô", en: "car", F: [_p("M40 292 L40 232 Q40 212 60 206 L110 200 L150 140 Q160 126 180 126 L270 126 Q290 126 300 140 L336 200 Q370 206 370 236 L370 292Z"), _p("M160 146 L190 146 L190 200 L126 200Z"), _p("M206 146 L264 146 Q280 146 288 160 L310 200 L206 200Z"), _r(344, 226, 26, 20, 6), _c(110, 296, 40), _c(300, 296, 40), _c(110, 296, 16), _c(300, 296, 16)] },
+    { vi: "Thuyền buồm", en: "sailboat", F: [_c(80, 80, 30), _r(193, 40, 10, 232), _g("203,52 203,250 332,250"), _g("190,92 190,250 90,250"), _g("203,40 244,52 203,64"), _p("M50 266 L350 266 Q330 342 280 346 L120 346 Q70 342 50 266Z"), _p("M20 362 Q55 342 90 362 Q125 382 160 362 Q195 342 230 362 Q265 382 300 362 Q335 342 380 362 L380 396 L20 396Z")] },
+    { vi: "Máy bay", en: "plane", F: [_g("172,176 250,176 190,80 150,80"), _g("60,176 92,176 70,100 40,100"), _p("M40 202 Q40 170 80 170 L300 170 Q370 176 376 206 Q370 236 300 236 L80 236 Q40 232 40 202Z"), _g("172,206 262,206 202,332 150,332"), _p("M330 180 Q360 186 368 206 L330 206Z"), _c(254, 196, 10), _c(222, 196, 10), _c(190, 196, 10), _c(158, 196, 10)] },
+    { vi: "Xe buýt", en: "bus", F: [_r(40, 110, 322, 212, 26), _r(40, 228, 252, 24), _r(64, 134, 62, 72, 8), _r(140, 134, 62, 72, 8), _r(216, 134, 62, 72, 8), _r(292, 134, 50, 152, 8), _c(110, 322, 38), _c(286, 322, 38), _c(110, 322, 15), _c(286, 322, 15)] },
+    { vi: "Đèn giao thông", en: "traffic light", F: [_r(185, 300, 30, 92), _r(140, 374, 120, 22, 6), _r(128, 40, 144, 272, 30), _c(200, 96, 38), _c(200, 176, 38), _c(200, 256, 38)] },
+    { vi: "Khinh khí cầu", en: "hot-air balloon", F: [_CL(80, 330, 52), _CL(330, 120, 44), _p("M200 40 Q320 40 320 160 Q320 240 230 290 L170 290 Q80 240 80 160 Q80 40 200 40Z"), _p("M200 40 Q150 120 170 290 L230 290 Q250 120 200 40Z"), _r(164, 320, 72, 56, 8)], D: [_p("M172 290 L172 320 M228 290 L228 320")] }
+  ] },
+  { vi: "Thiên nhiên", en: "Weather", ic: "🌈", pics: [
+    { vi: "Mặt trời", en: "sun", F: [..._RAYS(200, 200, 100, 175, 10), _c(200, 200, 92), _c(150, 228, 14), _c(250, 228, 14)], D: [_p("M165 232 Q200 262 235 232")], K: [_c(168, 186, 9), _c(232, 186, 9)] },
+    { vi: "Cầu vồng", en: "rainbow", F: [_ARC(200, 300, 150, 172), _ARC(200, 300, 126, 150), _ARC(200, 300, 102, 126), _ARC(200, 300, 78, 102), _ARC(200, 300, 54, 78), _CL(58, 312, 62), _CL(342, 312, 62)] },
+    { vi: "Mây và mưa", en: "rain cloud", F: [_CL(200, 210, 140), _T(120, 250, 14), _T(200, 260, 14), _T(280, 250, 14), _T(160, 320, 12), _T(240, 320, 12), _e(200, 376, 120, 16)] },
+    { vi: "Trăng và sao", en: "moon and stars", F: [_p("M246 60 Q118 80 118 200 Q118 322 246 342 Q150 302 150 200 Q150 100 246 60Z"), _S(282, 128, 42), _S(312, 262, 30), _S(80, 90, 24), _S(92, 334, 20)] },
+    { vi: "Núi và sông", en: "mountains", F: [_c(334, 62, 28), _g("20,332 140,120 260,332"), _g("150,332 270,90 390,332"), _g("140,120 117,162 130,156 140,170 150,156 163,162"), _g("270,90 245,136 258,130 270,146 282,130 295,136"), _r(10, 326, 380, 70), _p("M150 396 Q200 362 180 330 L240 330 Q260 362 250 396Z")] },
+    { vi: "Giọt nước", en: "water drop", F: [_p("M200 50 Q300 200 300 262 Q300 362 200 362 Q100 362 100 262 Q100 200 200 50Z"), _e(150, 232, 11, 28, 20), _c(150, 292, 12), _c(250, 292, 12), _T(330, 90, 16), _T(70, 130, 12)], D: [_p("M178 300 Q200 318 222 300")], K: [_c(172, 262, 9), _c(228, 262, 9)] }
+  ] },
+  { vi: "Quê hương", en: "My country", ic: "🌾", pics: [
+    { vi: "Lá cờ", en: "flag", F: [_r(58, 40, 14, 346, 4), _r(72, 62, 282, 184, 4), _S(214, 152, 62), _r(38, 374, 56, 20, 4)] },
+    { vi: "Hoa sen", en: "lotus", F: [_e(200, 332, 162, 42), _p("M200 302 Q88 302 58 230 Q140 224 200 302Z"), _p("M200 302 Q312 302 342 230 Q260 224 200 302Z"), _p("M200 302 Q118 262 110 170 Q172 190 200 302Z"), _p("M200 302 Q282 262 290 170 Q228 190 200 302Z"), _p("M200 302 Q150 200 200 108 Q250 200 200 302Z")] },
+    { vi: "Nón lá", en: "conical hat", F: [_e(200, 302, 166, 30), _g("200,70 362,302 38,302"), _c(200, 252, 18)], D: [_p("M150 145 L250 145 M120 190 L280 190 M92 236 L308 236"), _p("M92 314 Q200 398 308 314")] },
+    { vi: "Đèn lồng", en: "lantern", F: [_e(200, 200, 112, 106), _p("M200 96 Q140 200 200 304 Q260 200 200 96Z"), _r(148, 70, 104, 30, 8), _r(148, 296, 104, 30, 8), _r(192, 326, 16, 58, 6)], D: [_p("M200 70 V28")] },
+    { vi: "Bánh chưng", en: "square cake", F: [_r(80, 80, 240, 240, 14), _r(80, 150, 240, 18), _r(80, 232, 240, 18), _r(150, 80, 18, 240), _r(232, 80, 18, 240)] },
+    { vi: "Con diều", en: "kite", F: [_g("200,40 320,180 200,180"), _g("200,40 200,180 80,180"), _g("80,180 200,180 200,320"), _g("200,180 320,180 200,320"), _g("182,342 214,352 182,364"), _g("216,374 186,384 216,396")], D: [_p("M200 320 Q170 350 200 372 Q228 392 206 400"), _p("M80 180 L30 380")] }
+  ] },
+  { vi: "Âm nhạc", en: "Music", ic: "🎵", pics: [
+    { vi: "Cái trống", en: "drum", F: [_g("232,40 246,36 216,150 204,148"), _g("168,40 154,36 184,150 196,148"), _c(160, 34, 12), _c(240, 34, 12), _e(200, 340, 110, 34), _r(90, 170, 220, 170), _e(200, 170, 110, 34)], D: [_p("M90 192 L130 320 L170 192 L210 320 L250 192 L290 320 L310 260")] },
+    { vi: "Nốt nhạc", en: "music notes", F: [_r(164, 90, 14, 212), _p("M178 90 Q260 112 250 192 Q230 142 178 140Z"), _e(130, 302, 46, 32, -20), _g("262,120 364,100 364,132 262,152"), _r(262, 120, 12, 182), _r(352, 100, 12, 182), _e(240, 302, 32, 24, -20), _e(330, 282, 32, 24, -20)] },
+    { vi: "Đàn ghi-ta", en: "guitar", F: [_r(185, 30, 30, 172), _r(174, 18, 52, 42, 8), _p("M200 160 Q290 150 285 230 Q280 260 260 270 Q320 300 300 360 Q280 400 200 395 Q120 400 100 360 Q80 300 140 270 Q120 260 115 230 Q110 150 200 160Z"), _c(200, 280, 30), _r(164, 330, 72, 14, 4)], D: [_p("M194 40 V330 M206 40 V330")] },
+    { vi: "Cái chuông", en: "bell", F: [_c(200, 62, 16), _g("200,62 150,38 150,86"), _g("200,62 250,38 250,86"), _c(200, 342, 22), _p("M200 72 Q280 76 286 180 Q286 260 330 300 L70 300 Q114 260 114 180 Q120 76 200 72Z"), _r(60, 294, 280, 30, 15)] },
+    { vi: "Trống lắc", en: "tambourine", F: [_c(200, 200, 150), _c(200, 200, 112), ..._PET(200, 200, 131, 15, 8)] },
+    { vi: "Micro", en: "microphone", F: [_e(200, 372, 82, 20), _r(190, 296, 20, 70), _p("M150 176 L250 176 L226 300 L174 300Z"), _r(158, 176, 84, 22, 6), _c(200, 118, 76)], D: [_p("M150 90 L250 90 M132 118 L268 118 M150 146 L250 146 M200 44 V192")] }
+  ] }
+];
+$("#logo").innerHTML = RAINBOW;
+bindVoiceBtn($("#voiceBtn"));
+const PAL = ["#EF4A3C", "#FF8B2B", "#FFC928", "#FFE97A", "#2DB66B", "#9BE07A", "#14A3A8", "#2F7BEF", "#8FC6FF", "#8A55E0", "#FF6FA8", "#FFC2D9", "#9A6136", "#E8B98A", "#2A2F3A", "#9AA3B5", "#FFFFFF"];
+let ti = 4, pi = 0, color = "#EF4A3C", tool = "fill", size = 18, zoom = 1, undo = [], fills = {}, drawing = false;
+const saved = Store.get("bkt.fills", {});
+const key = () => ti + "-" + pi, pic = () => DRAW[ti].pics[pi];
+function tag(s, cls) {
+  return s.replace(/^<(\w+)/, '<$1 class="'.concat(cls, '"'));
+}
+function svgOf(p, mode, colors) {
+  const F = p.F.map((s, i) => {
+    let t = tag(s, "f");
+    if (mode === "fill") t = t.replace(/^<(\w+) /, '<$1 data-i="'.concat(i, '" '));
+    if (colors && colors[i]) t = t.replace(/^<(\w+) /, '<$1 style="fill:'.concat(colors[i], '" '));
+    return t;
+  }).join("");
+  if (mode === "fill") return F;
+  return F + (p.D || []).map((s) => tag(s, "d")).join("") + (p.K || []).map((s) => tag(s, "k")).join("");
+}
+function linesSVG(p, px, sw = 5) {
+  let defs = "", g = "";
+  const F = p.F;
+  F.forEach((s, i) => {
+    const later = F.slice(i + 1);
+    if (later.length) {
+      defs += '<mask id="'.concat(px, "m").concat(i, '" maskUnits="userSpaceOnUse" x="-20" y="-20" width="440" height="440"><rect x="-20" y="-20" width="440" height="440" fill="#fff"/><g fill="#000" stroke="none">').concat(later.join(""), "</g></mask>");
+      g += '<g mask="url(#'.concat(px, "m").concat(i, ')">').concat(s, "</g>");
+    } else g += s;
+  });
+  return "<defs>".concat(defs, '</defs><g fill="none" stroke="#1F2A52" stroke-width="').concat(sw, '" stroke-linejoin="round" stroke-linecap="round">').concat(g).concat((p.D || []).join(""), '</g><g fill="#1F2A52" stroke="none">').concat((p.K || []).join(""), "</g>");
+}
+function fillsSVG(p, colors) {
+  return '<g stroke="none">'.concat(p.F.map((s, i) => s.replace(/^<(\w+) /, '<$1 fill="'.concat(colors && colors[i] || "#fff", '" '))).join(""), "</g>");
+}
+function thumbSVG(p, colors, id) {
+  return '<svg viewBox="0 0 400 400">'.concat(fillsSVG(p, colors)).concat(linesSVG(p, "t" + id, 10), "</svg>");
+}
+function renderThemes() {
+  $("#themes").innerHTML = DRAW.map((t, i) => '<button class="th '.concat(i === ti ? "on" : "", '" data-i="').concat(i, '">').concat(t.ic, " ").concat(t.vi, "</button>")).join("");
+  $$(".th").forEach((b) => b.onclick = () => {
+    saveCur();
+    ti = +b.dataset.i;
+    pi = 0;
+    renderThemes();
+    renderThumbs();
+    load();
+  });
+}
+function renderThumbs() {
+  $("#thumbs").innerHTML = DRAW[ti].pics.map((p, i) => {
+    const c = saved[ti + "-" + i];
+    const fill = c ? p.F.map((_, k) => c[k]) : null;
+    return '<button class="tb '.concat(i === pi ? "on" : "", '" data-i="').concat(i, '">').concat(thumbSVG(p, fill, i)).concat(p.vi).concat(c && c.filter(Boolean).length === p.F.length ? '<span class="done">⭐</span>' : "", "</button>");
+  }).join("");
+  $$(".tb").forEach((b) => b.onclick = () => {
+    saveCur();
+    pi = +b.dataset.i;
+    renderThumbs();
+    load();
+  });
+}
+const fl = $("#fillLayer"), ll = $("#lineLayer"), bc = $("#brush"), bx = bc.getContext("2d");
+function load() {
+  const p = pic();
+  fl.innerHTML = svgOf(p, "fill");
+  ll.innerHTML = linesSVG(p, "L");
+  fills = Object.assign({}, (saved[key()] || []).reduce((o, c, i) => (c && (o[i] = c), o), {}));
+  Object.entries(fills).forEach(([i, c]) => {
+    const el = fl.querySelector('[data-i="'.concat(i, '"]'));
+    if (el) el.style.fill = c;
+  });
+  sizeBrush();
+  bx.clearRect(0, 0, bc.width, bc.height);
+  undo = [];
+  $("#picName").innerHTML = "".concat(p.vi, " <small>· ").concat(p.en, "</small>");
+  meter();
+  $("#praise").className = "praise";
+  $("#praise").textContent = "Chọn màu con thích rồi chạm vào tranh nhé! Không có màu nào là sai.";
+  Voice.say([["Let's colour the ".concat(p.en, "!"), "en"], ["Cùng tô ".concat(p.vi.toLowerCase(), " nào!"), "vi"]]);
+}
+function sizeBrush() {
+  const r = $("#paper").getBoundingClientRect();
+  const w = Math.round(r.width / zoom * devicePixelRatio);
+  if (bc.width !== w) {
+    const old = bc.width ? bx.getImageData(0, 0, bc.width, bc.height) : null;
+    bc.width = bc.height = w;
+  }
+}
+function saveCur() {
+  const p = pic(), arr = p.F.map((_, i) => fills[i] || null);
+  saved[key()] = arr;
+  Store.set("bkt.fills", saved);
+}
+function meter() {
+  const n = pic().F.length, k = Object.keys(fills).length, pc = Math.round(k / n * 100);
+  $("#meterBar").style.width = pc + "%";
+  $("#meterTxt").textContent = pc + "%";
+  return pc;
+}
+fl.addEventListener("click", (e) => {
+  if (tool === "brush") return;
+  const el = e.target.closest(".f");
+  if (!el) return;
+  const i = el.dataset.i;
+  const prev = fills[i] || null, next = tool === "erase" ? null : color;
+  if (prev === next) return;
+  undo.push({ t: "fill", i, prev });
+  setFill(i, next);
+  Sfx.pop();
+  const pc = meter();
+  if (pc === 100 && tool !== "erase") cheer();
+  saveCur();
+});
+function setFill(i, c) {
+  const el = fl.querySelector('[data-i="'.concat(i, '"]'));
+  if (c) {
+    fills[i] = c;
+    el.style.fill = c;
+  } else {
+    delete fills[i];
+    el.style.fill = "";
+  }
+}
+const bp = (e) => {
+  const r = bc.getBoundingClientRect();
+  return [(e.clientX - r.left) * bc.width / r.width, (e.clientY - r.top) * bc.height / r.height];
+};
+bc.onpointerdown = (e) => {
+  if (tool === "fill") return;
+  drawing = true;
+  bc.setPointerCapture(e.pointerId);
+  undo.push({ t: "brush", img: bx.getImageData(0, 0, bc.width, bc.height) });
+  const [x, y] = bp(e), s = size * bc.width / 400;
+  bx.globalCompositeOperation = tool === "erase" ? "destination-out" : "source-over";
+  bx.strokeStyle = color;
+  bx.lineWidth = s;
+  bx.lineCap = bx.lineJoin = "round";
+  bx.beginPath();
+  bx.moveTo(x, y);
+  bx.lineTo(x + 0.1, y);
+  bx.stroke();
+  if (tool === "erase") {
+    const el = document.elementsFromPoint(e.clientX, e.clientY).find((n) => n.classList && n.classList.contains("f") && n.dataset.i != null);
+    if (el && fills[el.dataset.i]) {
+      undo.push({ t: "fill", i: el.dataset.i, prev: fills[el.dataset.i] });
+      setFill(el.dataset.i, null);
+      meter();
+      saveCur();
+    }
+  }
+};
+bc.onpointermove = (e) => {
+  if (!drawing) return;
+  const [x, y] = bp(e);
+  bx.lineTo(x, y);
+  bx.stroke();
+};
+bc.onpointerup = bc.onpointercancel = () => {
+  drawing = false;
+};
+function setTool(t) {
+  tool = t;
+  ["Fill", "Brush", "Erase"].forEach((n) => $("#t" + n).classList.toggle("on", n.toLowerCase() === t));
+  $("#paper").classList.toggle("brushing", t !== "fill");
+}
+$("#tFill").onclick = () => setTool("fill");
+$("#tBrush").onclick = () => setTool("brush");
+$("#tErase").onclick = () => setTool("erase");
+$("#tUndo").onclick = () => {
+  const u = undo.pop();
+  if (!u) {
+    toast("Chưa có gì để quay lại");
+    return;
+  }
+  if (u.t === "fill") setFill(u.i, u.prev);
+  else bx.putImageData(u.img, 0, 0);
+  meter();
+  saveCur();
+};
+$("#tClear").onclick = () => {
+  const b = $("#tClear");
+  if (!b.dataset.c) {
+    b.dataset.c = 1;
+    b.innerHTML = "<b>❓</b>Bấm lần nữa";
+    setTimeout(() => {
+      delete b.dataset.c;
+      b.innerHTML = "<b>🔄</b>Làm lại";
+    }, 2500);
+    return;
+  }
+  delete b.dataset.c;
+  b.innerHTML = "<b>🔄</b>Làm lại";
+  fills = {};
+  $$("#fillLayer .f").forEach((el) => el.style.fill = "");
+  bx.clearRect(0, 0, bc.width, bc.height);
+  undo = [];
+  meter();
+  saveCur();
+  renderThumbs();
+};
+$("#tZoom").onclick = () => {
+  zoom = zoom === 1 ? 1.6 : zoom === 1.6 ? 2.2 : 1;
+  $("#paper").style.width = zoom === 1 ? "" : "calc(min(100%,70vh)*".concat(zoom, ")");
+  $("#tZoom").innerHTML = "<b>🔍</b>".concat(zoom === 1 ? "Phóng to" : "×" + zoom);
+};
+$("#sizes").querySelectorAll("button").forEach((b) => b.onclick = () => {
+  size = +b.dataset.s;
+  $$("#sizes button").forEach((x) => x.classList.toggle("on", x === b));
+});
+$("#pal").innerHTML = PAL.map((c) => '<button class="sw '.concat(c === color ? "on" : "", '" data-c="').concat(c, '" style="background:').concat(c, '" aria-label="màu ').concat(c, '"></button>')).join("") + '<label class="sw" style="background:conic-gradient(red,yellow,lime,cyan,blue,magenta,red);position:relative" title="Màu khác"><input type="color" id="custom" style="opacity:0;position:absolute;inset:0;width:100%;height:100%"></label>';
+$$("#pal .sw[data-c]").forEach((b) => b.onclick = () => {
+  color = b.dataset.c;
+  $$("#pal .sw").forEach((x) => x.classList.toggle("on", x === b));
+  Sfx.pop();
+  if (tool === "erase") setTool("fill");
+});
+$("#custom").oninput = (e) => {
+  color = e.target.value;
+  $$("#pal .sw").forEach((x) => x.classList.remove("on"));
+};
+function cheer() {
+  const pc = meter(), el = $("#praise");
+  el.className = "praise good";
+  const st = pc >= 100 ? 3 : pc >= 60 ? 2 : 1;
+  el.innerHTML = "".concat(pick(["Đẹp quá!", "Con khéo tay quá!", "Tuyệt vời!", "Màu sắc thật vui!"]), " ").concat(pick(["Beautiful!", "Wonderful!", "Great colours!"]), '<br><span class="stars">').concat(starsHTML(st, 3), "</span>");
+  Sfx.win();
+  confetti(pc >= 100 ? 110 : 50);
+  Voice.say([[pick(["Beautiful!", "Wonderful colours!"]), "en"], ["Con khéo tay quá!", "vi"]]);
+  renderThumbs();
+}
+$("#doneBtn").onclick = () => {
+  const pc = meter();
+  if (pc < 30 && !bx.getImageData(0, 0, bc.width, bc.height).data.some((v, i) => i % 4 === 3 && v)) {
+    $("#praise").className = "praise";
+    $("#praise").textContent = "Con tô thêm vài chỗ nữa nhé! Con chọn màu nào cũng đẹp.";
+    Voice.say([["Keep going!", "en"]]);
+    return;
+  }
+  cheer();
+};
+function composeSVG(colored, brush) {
+  const p = pic();
+  const colors = colored ? p.F.map((_, i) => fills[i] || "#fff") : null;
+  return '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 400 400">'.concat(fillsSVG(p, colors)).concat(brush ? '<image href="'.concat(brush, '" xlink:href="').concat(brush, '" x="0" y="0" width="400" height="400"/>') : "").concat(linesSVG(p, "P"), "</svg>");
+}
+function framed() {
+  return inFrame();
+}
+function doPrint(orient, colored) {
+  $("#pageSize").textContent = "@page{size:A4 ".concat(orient, ";margin:12mm}");
+  const p = pic();
+  let s = composeSVG(colored, colored && bc.width ? bc.toDataURL() : "");
+  $("#printArea").innerHTML = "<h1>".concat(p.vi, " · ").concat(p.en, "</h1>").concat(s, '<p style="font:14pt Arial">Bé: ……………………… Lớp: ……… · Cầu Vồng Cảm Xúc – Trường MN Bất Bạt C</p>');
+  try {
+    window.print();
+  } catch (e) {
+  }
+  if (framed()) toast("Nếu cửa sổ in không hiện: tải file về máy, mở bằng Chrome rồi bấm In.", 3800);
+}
+$("#printP").onclick = () => doPrint("portrait", true);
+$("#printL").onclick = () => doPrint("landscape", true);
+$("#printBlank").onclick = () => doPrint("portrait", false);
+function svgImg(svg) {
+  return new Promise((ok, no) => {
+    const i = new Image();
+    i.onload = () => ok(i);
+    i.onerror = no;
+    i.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  });
+}
+$("#saveBtn").onclick = async () => {
+  try {
+    const p = pic(), N = 'xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="1200" height="1200"';
+    const fillImg = await svgImg("<svg ".concat(N, ">").concat(fillsSVG(p, p.F.map((_, i) => fills[i] || "#fff")), "</svg>")), lineImg = await svgImg("<svg ".concat(N, ">").concat(linesSVG(p, "S"), "</svg>"));
+    const c = document.createElement("canvas");
+    c.width = c.height = 1200;
+    const g = c.getContext("2d");
+    g.fillStyle = "#fff";
+    g.fillRect(0, 0, 1200, 1200);
+    g.drawImage(fillImg, 0, 0, 1200, 1200);
+    if (bc.width) g.drawImage(bc, 0, 0, 1200, 1200);
+    g.drawImage(lineImg, 0, 0, 1200, 1200);
+    const name = "Be-Kheo-Tay-".concat(p.en.replace(/\s+/g, "-"), ".png");
+    c.toBlob(async (b) => {
+      const f = new File([b], name, { type: "image/png" });
+      if (navigator.canShare && navigator.canShare({ files: [f] }) && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        try {
+          await navigator.share({ files: [f], title: "Tranh của bé" });
+          return;
+        } catch (e) {
+        }
+      }
+      const a = document.createElement("a");
+      a.download = name;
+      a.href = URL.createObjectURL(b);
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => {
+        URL.revokeObjectURL(a.href);
+        a.remove();
+      }, 1500);
+      toast(framed() ? "Nếu ảnh chưa tải về: mở bản tải về trên máy để lưu." : "Đã lưu tranh vào thư mục Tải về", 3800);
+    }, "image/png");
+  } catch (e) {
+    toast("Chưa lưu được tranh trên trình duyệt này. Con chụp màn hình nhé!", 3800);
+  }
+};
+window.addEventListener("resize", sizeBrush);
+renderThemes();
+renderThumbs();
+load();
+window.APP_START = () => {
+  const p = pic();
+  Voice.say([["Let's colour the ".concat(p.en, "!"), "en"], ["Cùng tô ".concat(p.vi.toLowerCase(), " nào!"), "vi"]]);
+};
+</script>
+</body>
+</html>
