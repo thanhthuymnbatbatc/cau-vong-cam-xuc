@@ -7,6 +7,11 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@600;800;900&display=swap">
 <script>window.onerror = function(m, s, l, c) {
   try {
+    m = String(m || "");
+    /* Bo qua loi do Zalo, Facebook, Messenger... tu chen ma vao trang (khong phai loi cua app) */
+    if (!l || l <= 1) return;
+    if (/zalo|webkit\.messageHandlers|__gCrWeb|fbq|FB_IAB|Script error/i.test(m)) return;
+    if (s && s.split(/[?#]/)[0] !== location.href.split(/[?#]/)[0]) return;
     var d = document.getElementById("errBanner");
     if (!d) {
       d = document.createElement("div");
@@ -18,6 +23,28 @@
   } catch (e) {
   }
 };
+/* Cham chac chan: neu be cham vao nut ma trinh duyet "nuot" mat cu cham (vd. vua ve xong da bam ngay), tu bam ho dung 1 lan */
+(function() {
+  var p = null;
+  function sel(t) { return t && t.closest ? t.closest("button,[role=tab],label[for]") : null; }
+  document.addEventListener("pointerdown", function(e) {
+    if (e.pointerType !== "touch") { p = null; return; }
+    var b = sel(e.target);
+    p = b ? { b: b, x: e.clientX, y: e.clientY, t: Date.now(), ok: false } : null;
+  }, true);
+  document.addEventListener("click", function(e) {
+    if (p && (p.b === e.target || p.b.contains(e.target))) p.ok = true;
+  }, true);
+  document.addEventListener("pointerup", function(e) {
+    var q = p;
+    if (!q || e.pointerType !== "touch") return;
+    if (Math.abs(e.clientX - q.x) > 12 || Math.abs(e.clientY - q.y) > 12 || Date.now() - q.t > 900 || sel(document.elementFromPoint(e.clientX, e.clientY)) !== q.b) { p = null; return; }
+    setTimeout(function() {
+      if (!q.ok && !q.b.disabled && document.contains(q.b)) { q.ok = true; q.b.click(); }
+      if (p === q) p = null;
+    }, 650);
+  }, true);
+})();
 </script><style>:root {
   --ink:#1F2A52;
   --ink-soft:#4A5582;
@@ -239,6 +266,7 @@ h3 {
 }
 .toast {
   position: fixed;
+  pointer-events: none;
   left: 50%;
   bottom: calc(20px + env(safe-area-inset-bottom, 0px));
   transform: translateX(-50%) translateY(140%);
@@ -1603,7 +1631,7 @@ $("#camBtn").onclick = () => stream ? stopCam() : startCam();
 let dDown = false;
 dc.onpointerdown = (e) => {
   dDown = true;
-  dc.setPointerCapture(e.pointerId);
+  try { dc.setPointerCapture(e.pointerId); } catch (_pc) {}
 };
 dc.onpointerup = dc.onpointercancel = () => dDown = false;
 dc.onpointermove = (e) => {
